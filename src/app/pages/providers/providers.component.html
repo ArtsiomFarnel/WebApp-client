@@ -1,0 +1,15 @@
+<div>
+  <div>Providers list</div>
+  <span>Search</span><input type="text" id="search" (input)="search()">
+  <div *ngIf="providers | async as providers$; else loading">
+    <table>
+      <tr *ngFor="let provider of providers$">
+        <td>{{provider.Name}}</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<ng-template #loading>
+<div>Loading...</div>
+</ng-template>

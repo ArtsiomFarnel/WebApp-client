@@ -1,0 +1,30 @@
+<form class="card" [formGroup]="form" (ngSubmit)="submit()">
+    <h2>Log in to the admin panel</h2>
+  
+    <div class="alert alert-danger" *ngIf="authService?.error$ | async as error">{{ error }}</div>
+  
+    <div class="alert alert-info" *ngIf="message">{{ message }}</div>
+  
+    <div class="form-control" [ngClass]="{invalid: form.get('login')?.touched && form.get('login')?.invalid}">
+        <label for="login">UserName: </label>
+        <input id="login" type="text" formControlName="login">
+        <div class="validation" *ngIf="form.get('login')?.touched && form.get('login')?.invalid">
+            <small *ngIf="form.get('login')?.errors?.required">Enter email field.</small>
+            <small *ngIf="form.get('login')?.errors?.email">Invalid email.</small>
+        </div>
+    </div>
+  
+    <div class="form-control" [ngClass]="{invalid: form.get('password')?.touched && form.get('password')?.invalid}">
+        <label for="password">Password: </label>
+        <input id="password" type="password" formControlName="password">
+        <div class="validation" *ngIf="form.get('password')?.touched && form.get('password')?.invalid">
+            <small *ngIf="form.get('password')?.errors?.required">Enter password.</small>
+            <small *ngIf="form.get('password')?.errors?.minlength">
+                Password length must not be less than {{form.get('password')?.errors?.minlength.requiredLength}}.
+                Actual length is {{form.get('password')?.errors?.minlength.actualLength}}.
+            </small>
+        </div>
+    </div>
+    <a [routerLink]="['/signup']"><button class="btn-dark">Sign Up</button></a>
+    <button type="submit" class="btn btn-dark" [disabled]="form?.invalid || submitted">Log in</button>
+</form>

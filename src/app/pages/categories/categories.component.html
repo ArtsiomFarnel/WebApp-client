@@ -1,0 +1,14 @@
+<div>
+    <div>Categories list</div>
+    <span>Search</span><input type="text" id="search" (input)="search()">
+    <div *ngIf="categories | async as categories$; else loading">
+        <table>
+            <tr *ngFor="let category of categories$">
+              <td>{{category.Name}}</td>
+            </tr>
+        </table>
+    </div>
+</div>
+<ng-template #loading>
+  <div>Loading...</div>
+</ng-template>
