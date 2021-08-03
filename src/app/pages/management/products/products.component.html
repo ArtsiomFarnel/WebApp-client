@@ -29,60 +29,55 @@
     </div>
 
     <div class="collapse" id="collapseExample">
-        
-            <div class="container form-menu">
-                
-                <div class="form-group row">
-
-                    <div class="col-sm-6 form-group">
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label" style="font-weight: bold">Search</label>
-                            <div class="col-sm-10">
-                                <input class="form-control" style="border-radius: 0px;" type="search" id="search" (input)="search()" />
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label" style="font-weight: bold">Order</label>
-                            <div class="col-sm-10">
-                                <input class="form-control" style="border-radius: 0px;" type="text" id="order" (change)="order()" />
-                            </div>
+        <div class="container form-menu">
+            <div class="form-group row">
+                <div class="col-sm-6 form-group">
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label" style="font-weight: bold">Search</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" style="border-radius: 0px;" type="search" id="search" (input)="search()" />
                         </div>
                     </div>
-
-                    <div class="col-sm-6 form-group">
-                        <div class="form-group row">
-                            <label class="col-sm-4 col-form-label" style="font-weight: bold">Category</label>
-                            <div class="col-sm-8">
-                                <select *ngIf="categories | async as categories$; else loading" class="form-control" style="border-radius: 0px;" id="category" (change)="setCategory()">
-                                    <option value="0">All</option>
-                                    <option *ngFor="let category of categories$" value="{{category.Id}}">{{category.Name}}</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-4 col-form-label" style="font-weight: bold">Provider</label>
-                            <div class="col-sm-8">
-                                <select *ngIf="providers | async as providers$; else loading" class="form-control" style="border-radius: 0px;" id="provider" (change)="setProvider()">
-                                    <option value="0">All</option>
-                                    <option *ngFor="let provider of providers$" value="{{provider.Id}}">{{provider.Name}}</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-4 col-form-label" style="font-weight: bold">Currency</label>
-                            <div class="col-sm-8">
-                                <select class="form-control" style="border-radius: 0px;" id="currency" (change)="currencyChange()">
-                                    <option value="EUR">EUR</option>
-                                    <option value="USD">USD</option>
-                                    <option value="RUB">RUB</option>
-                                    <option value="BYN">BYN</option>
-                                </select>
-                            </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label" style="font-weight: bold">Order</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" style="border-radius: 0px;" type="text" id="order" (change)="order()" />
                         </div>
                     </div>
-                   
+                </div>
+                <div class="col-sm-6 form-group">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label" style="font-weight: bold">Category</label>
+                        <div class="col-sm-8">
+                            <select *ngIf="categories | async as categories$; else loading" class="form-control" style="border-radius: 0px;" id="category" (change)="setCategory()">
+                                <option value="0">All</option>
+                                <option *ngFor="let category of categories$" value="{{category.Id}}">{{category.Name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label" style="font-weight: bold">Provider</label>
+                        <div class="col-sm-8">
+                            <select *ngIf="providers | async as providers$; else loading" class="form-control" style="border-radius: 0px;" id="provider" (change)="setProvider()">
+                                <option value="0">All</option>
+                                <option *ngFor="let provider of providers$" value="{{provider.Id}}">{{provider.Name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label" style="font-weight: bold">Currency</label>
+                        <div class="col-sm-8">
+                            <select class="form-control" style="border-radius: 0px;" id="currency" (change)="currencyChange()">
+                                <option value="EUR">EUR</option>
+                                <option value="USD">USD</option>
+                                <option value="RUB">RUB</option>
+                                <option value="BYN">BYN</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </div>
     </div>
 
     <div *ngIf="products | async as products$; else loading">

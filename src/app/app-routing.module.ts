@@ -1,4 +1,4 @@
-import { Component, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { CatalogComponent } from './pages/catalog/catalog.component';
 import { CategoriesComponent } from './pages/management/categories/categories.component';
@@ -9,48 +9,29 @@ import { ProductsComponent } from './pages/management/products/products.componen
 import { ProvidersComponent } from './pages/management/providers/providers.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { AuthGuard } from './services/account.guard';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { AboutComponent } from './pages/about/about.component';
+import { PrivacyComponent } from './pages/privacy/privacy.component';
 
 const routes: Routes = [
-  {
-    path: "",
-    component: HomeComponent
-  },
-  {
-    path: "login",
-    component: LoginComponent
-  },
-  {
-    path: "signup",
-    component: SignupComponent
-  },
-  {
-    path: "catalog",
-    component: CatalogComponent
-  },
-  {
-    path: "management",
-    component: ManagementComponent,
+  { path: "", component: HomeComponent },
+  { path: "about", component: AboutComponent },
+  { path: "privacy", component: PrivacyComponent },
+  { path: "login", component: LoginComponent },
+  { path: "signup", component: SignupComponent },
+  { path: "catalog", component: CatalogComponent },
+  { path: "profile", component: ProfileComponent, canActivate: [AuthGuard] },
+  { 
+    path: "management", 
+    component: ManagementComponent, 
     children: [
-      {
-        path: "providers",
-        component: ProvidersComponent
-      },
-      {
-        path: "categories",
-        component: CategoriesComponent
-      },
-      {
-        path: "products",
-        component: ProductsComponent
-      },
-    ],
-    canActivate: [AuthGuard]
+      { path: "providers", component: ProvidersComponent },
+      { path: "categories", component: CategoriesComponent },
+      { path: "products", component: ProductsComponent },
+    ], 
+    canActivate: [AuthGuard] 
   },
-  {
-    path: "**",
-    redirectTo: "",
-    pathMatch: "full"
-  }
+  { path: "**", redirectTo: "", pathMatch: "full" }
 ];
 
 @NgModule({

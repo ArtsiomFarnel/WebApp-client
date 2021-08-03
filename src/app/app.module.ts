@@ -18,6 +18,9 @@ import { AuthGuard } from './services/account.guard';
 import { AccountService } from './services/account.service';
 import { CatalogComponent } from './pages/catalog/catalog.component';
 import { ManagementComponent } from './pages/management/management.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { AboutComponent } from './pages/about/about.component';
+import { PrivacyComponent } from './pages/privacy/privacy.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +32,10 @@ import { ManagementComponent } from './pages/management/management.component';
     LoginComponent,
     SignupComponent,
     CatalogComponent,
-    ManagementComponent
+    ManagementComponent,
+    ProfileComponent,
+    AboutComponent,
+    PrivacyComponent
   ],
   imports: [
     BrowserModule,

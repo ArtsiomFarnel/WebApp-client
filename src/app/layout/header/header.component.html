@@ -23,6 +23,9 @@
                         <a class="nav-link text-dark" [routerLink]="['catalog']" class="nav-link"><h4>Catalog</h4></a>
                     </li>
                     <li class="nav-item active">
+                        <a class="nav-link text-dark" [routerLink]="['about']" class="nav-link"><h4>About</h4></a>
+                    </li>
+                    <li class="nav-item active" *ngIf="authService.isAuthenticated();">
                         <a class="nav-link text-dark" [routerLink]="['management']" class="nav-link"><h4>Management</h4></a>
                     </li>
                 </ul>
@@ -30,7 +33,7 @@
             <div style="text-align: right">
                 <ul class="navbar-nav flex-grow-1" *ngIf="authService.isAuthenticated(); else login">
                     <li class="nav-item">
-                        <a class="nav-link">
+                        <a class="nav-link" [routerLink]="['profile']">
                             <img src="assets/img/profiles/default.png" width="32" style="border: 1px; border-style: solid; border-color: dimgray" class="rounded-circle" alt="Profile">
                         </a>
                     </li>
@@ -48,7 +51,7 @@
 <ng-template #login>
     <ul class="navbar-nav flex-grow-1">
         <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/login']">
+            <a class="nav-link" [routerLink]="['login']">
                 <input type="button" value="Log in" class="btn btn-outline-dark" style="border-radius: 0px;" />
             </a>
         </li>
