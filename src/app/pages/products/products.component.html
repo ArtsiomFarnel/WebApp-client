@@ -143,11 +143,20 @@
     <ul class="products clearfix">
         <li class="product-wrapper" *ngFor="let product of products$">
             <div class="product">
-                <p>{{product.Name}}</p>
-                <p>{{product.Description}}</p>
-                <p>{{product.Cost}}</p>
-                <p>{{product.Category}}</p>
-                <p>{{product.Provider}}</p>
+                <div class="product-photo">
+                    <img src="assets/img/products/default.png" width="128" alt="Preview Image" />
+                </div>
+                <div>
+                    <h4 style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">{{product.Name}}</h4>
+                    <p style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
+                        <b>Cost: </b><span>{{product.Cost}}</span><br>
+                        <b>Category: </b><span>{{product.Category}}</span><br>
+                        <b>Provider: </b><span>{{product.Provider}}</span><br>
+                    </p>
+                </div>
+                <div>
+                    <a class="btn btn-block btn-outline-dark" style="border-radius: 0px;">Detail</a>
+                </div>
             </div>
         </li>
     </ul>
