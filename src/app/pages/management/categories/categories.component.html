@@ -1,13 +1,73 @@
-<div>
-    <div>Categories list</div>
-    <span>Search</span><input type="text" id="search" (input)="search()">
-    <div *ngIf="categories | async as categories$; else loading">
-        <table>
-            <tr *ngFor="let category of categories$">
-              <td>{{category.Name}}</td>
-            </tr>
-        </table>
+<style>
+  .main-container {
+      margin-right: 180px;
+  }
+
+  .control-menu {
+      float: left;
+      width: 300px;
+  }
+
+  .form-menu {
+      box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+      padding: 10px;
+      border: 1px solid dimgray;
+  }
+
+  .items-container {
+      float: left;
+      margin-left: 20px;
+      margin-bottom: 60px;
+  }
+
+  .item-container {
+      padding: 10px;
+      border: 1px solid dimgray;
+      width: 600px;
+  }
+
+      .item-container:hover {
+          box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+      }
+
+  .form-control:focus {
+      border-color: dimgray;
+      box-shadow: 0px 1px 1px rgba(0, 0, 0, 0) inset, 0px 0px 8px rgba(0, 0, 0, 0);
+  }
+</style>
+
+<div class="main-container">
+  <div class="control-menu">
+      <div class="form-menu">
+        <div class="row">
+          <h4 class="col-sm-8">Categories List</h4>
+          <div class="col-sm-2">
+            <a class="btn btn-outline-dark" style="border-radius: 0px;">Add</a>
+        </div>
+      </div>
+          
+          <hr style="background-color: dimgray; height: 1px;" />
+              <div class="form-group">
+                  <label class="col-form-label" style="font-weight: bold">Search</label>
+                  <input class="form-control" style="border-radius: 0px;" type="search" id="search" (input)="search()" />
+              </div>
+      </div>
+  </div>
+
+  <div class="items-container" *ngIf="categories | async as categories$; else loading">
+    <div *ngFor="let category of categories$">
+      <div class="item-container" >
+        <div>
+            <b>Name: </b><span>{{category.Name}}</span>
+            <span style="padding-left: 10px;">
+              <a class="btn btn-outline-dark" style="border-radius: 0px;">Update</a>
+              <a class="btn btn-outline-dark" style="border-radius: 0px;">Delete</a>
+            </span>
+        </div>
     </div>
+    <div style="margin-top: 10px"></div>
+    </div>
+  </div>
 </div>
 <ng-template #loading>
   <div>Loading...</div>

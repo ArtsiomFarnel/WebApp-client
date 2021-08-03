@@ -15,7 +15,6 @@ export class HeaderComponent implements OnInit {
 
   logOut() {
     this.authService.logout();
-    alert("jwt token was removed!");
- }
+  }
 
 }
