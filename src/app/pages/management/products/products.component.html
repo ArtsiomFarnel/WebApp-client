@@ -19,8 +19,6 @@
     <div class="collapse" id="collapseExample">
         <div>
             <div class="container form-menu">
-                <h3>Products list</h3>
-                <hr style="background-color: dimgray; height: 1px;" />
                 <div class="form-group row">
                     <div class="col-sm-6 form-group row">
                         <label class="col-sm-2 col-form-label" style="font-weight: bold">Search</label>
@@ -76,6 +74,17 @@
         </div>
     </div>
 
+    <div>
+        <div class="row no-gutters" style="border: 1px solid dimgray">
+            <div class="col-12 col-sm-6 col-md-8">
+                <h4>Products list</h4>
+            </div>
+            <div class="col-6 col-md-4">
+                <a class="btn btn-block btn-outline-dark" style="border-radius: 0px;">Add</a>
+            </div>
+          </div>
+    </div>
+
     <div *ngIf="products | async as products$; else loading">
         <table class="table table-bordered table-sm">
             <thead>
@@ -85,6 +94,7 @@
                     <th>Cost</th>
                     <th>Category</th>
                     <th>Provider</th>
+                    <th>Operation</th>
                 </tr>
             </thead>
             <tbody>
@@ -94,6 +104,12 @@
                     <td>{{product.Cost}}</td>
                     <td>{{product.Category}}</td>
                     <td>{{product.Provider}}</td>
+                    <td>
+                        <div style="display: inline-block" class="btn-group-vertical btn-block">
+                            <a class="btn btn-outline-dark" style="border-radius: 0px;">Update</a><br />
+                            <a class="btn btn-outline-dark" style="border-radius: 0px;">Delete</a>
+                        </div>
+                    </td>
                 </tr>
             </tbody>
         </table>
