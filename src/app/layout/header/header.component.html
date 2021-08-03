@@ -1,13 +1,12 @@
 <style>
-  .logo {
-      transition: transform .4s ease-out;
-      box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
-  }
-
-      .logo:hover {
-          transform: scale(1.33);
-          box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
-      }
+    .logo {
+        transition: transform .4s ease-out;
+        box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+    }
+        .logo:hover {
+            transform: scale(1.33);
+            box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+        }
 </style>
 <header>
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3 bg-white">
@@ -21,7 +20,7 @@
             <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                 <ul class="navbar-nav flex-grow-1">
                     <li class="nav-item active">
-                        <a class="nav-link text-dark" [routerLink]="['products']" class="nav-link"><h4>Catalog</h4></a>
+                        <a class="nav-link text-dark" [routerLink]="['catalog']" class="nav-link"><h4>Catalog</h4></a>
                     </li>
                     <li class="nav-item active">
                         <a class="nav-link text-dark" [routerLink]="['management']" class="nav-link"><h4>Management</h4></a>
@@ -29,8 +28,13 @@
                 </ul>
             </div>
             <div style="text-align: right">
-                <ul class="navbar-nav flex-grow-1">
-                    <li class="nav-item" *ngIf="authService.isAuthenticated(); else login">
+                <ul class="navbar-nav flex-grow-1" *ngIf="authService.isAuthenticated(); else login">
+                    <li class="nav-item">
+                        <a class="nav-link">
+                            <img src="assets/img/profiles/default.png" width="32" style="border: 1px; border-style: solid; border-color: dimgray" class="rounded-circle" alt="Profile">
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" [routerLink]="['home']">
                             <input type="button" (click)="logOut()" value="Log out" class="btn btn-outline-dark" style="border-radius: 0px;" />
                         </a>
@@ -42,9 +46,11 @@
 </header>
 
 <ng-template #login>
-    <li>
-        <a class="nav-link" [routerLink]="['/login']">
-            <input type="button" value="Log in" class="btn btn-outline-dark" style="border-radius: 0px;" />
-        </a>
-    </li>
+    <ul class="navbar-nav flex-grow-1">
+        <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/login']">
+                <input type="button" value="Log in" class="btn btn-outline-dark" style="border-radius: 0px;" />
+            </a>
+        </li>
+    </ul>
 </ng-template>

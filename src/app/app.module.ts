@@ -16,6 +16,7 @@ import { SignupComponent } from './pages/signup/signup.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuthGuard } from './services/account.guard';
 import { AccountService } from './services/account.service';
+import { CatalogComponent } from './pages/catalog/catalog.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { AccountService } from './services/account.service';
     CategoriesComponent,
     ProductsComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    CatalogComponent
   ],
   imports: [
     BrowserModule,

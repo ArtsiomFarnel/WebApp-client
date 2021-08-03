@@ -1,5 +1,6 @@
 import { Component, NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { CatalogComponent } from './pages/catalog/catalog.component';
 import { CategoriesComponent } from './pages/categories/categories.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
@@ -23,16 +24,8 @@ const routes: Routes = [
     component: SignupComponent
   },
   {
-    path: "providers",
-    component: ProvidersComponent
-  },
-  {
-    path: "categories",
-    component: CategoriesComponent
-  },
-  {
-    path: "products",
-    component: ProductsComponent
+    path: "catalog",
+    component: CatalogComponent
   },
   {
     path: "management",
@@ -42,11 +35,6 @@ const routes: Routes = [
   {
     path: "admin",
     loadChildren: () => import("./pages/pages-routing.module").then(p => p.PagesRoutingModule)
-  },
-  {
-    path: "**",
-    redirectTo: "",
-    pathMatch: "full"
   }
 ];
 
