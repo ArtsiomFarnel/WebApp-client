@@ -6,9 +6,9 @@ import { AppComponent } from './app.component';
 import { FooterModule } from './layout/footer/footer.module';
 import { HeaderModule } from './layout/header/header.module';
 import { HomeComponent } from './pages/home/home.component';
-import { ProvidersComponent } from './pages/providers/providers.component';
-import { CategoriesComponent } from './pages/categories/categories.component';
-import { ProductsComponent } from './pages/products/products.component';
+import { ProvidersComponent } from './pages/management/providers/providers.component';
+import { CategoriesComponent } from './pages/management/categories/categories.component';
+import { ProductsComponent } from './pages/management/products/products.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthInterseptor } from './services/account.interseptor';
 import { LoginComponent } from './pages/login/login.component';
@@ -17,6 +17,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuthGuard } from './services/account.guard';
 import { AccountService } from './services/account.service';
 import { CatalogComponent } from './pages/catalog/catalog.component';
+import { ManagementComponent } from './pages/management/management.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { CatalogComponent } from './pages/catalog/catalog.component';
     ProductsComponent,
     LoginComponent,
     SignupComponent,
-    CatalogComponent
+    CatalogComponent,
+    ManagementComponent
   ],
   imports: [
     BrowserModule,
