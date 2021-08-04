@@ -12,6 +12,7 @@ import { CategoriesService } from 'src/app/services/categories.service';
 export class CategoriesComponent implements OnInit {
 
   categories: Category[] = [];
+  metaData: any;
 
   form: FormGroup = new FormGroup({
     title: new FormControl(''),
@@ -20,7 +21,7 @@ export class CategoriesComponent implements OnInit {
   submitted = false;
   message: string = '';
   
-  private params = {
+  public params = {
     SearchTerm: '',
     PageNumber: 1
   }
@@ -37,7 +38,9 @@ export class CategoriesComponent implements OnInit {
 
   sendQuery(): void {
     this.categoriesService.GetAllCategories(this.params).subscribe(data => {
-      this.categories = data;
+      console.log(data.headers.get('pagination'));
+      this.categories = data.body.categories;
+      this.metaData = data.body.pagination;
     });;
   }
 
@@ -61,4 +64,18 @@ export class CategoriesComponent implements OnInit {
     this.categoriesService.AddCategory(category).subscribe();
   }
 
+
+leftPage(): void {
+    if (this.params.PageNumber == 1) return;
+    this.params.PageNumber--;
+    this.sendQuery();
+  }
+
+  rightPage(): void {
+    this.params.PageNumber++;
+    if (this.params.PageNumber <= this.metaData.totalPages)
+      this.sendQuery();
+    else
+      this.leftPage();
+  }
 }

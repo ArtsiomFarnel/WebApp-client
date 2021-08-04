@@ -12,7 +12,6 @@ import { ProvidersService } from 'src/app/services/providers.service';
 })
 export class ProductsComponent implements OnInit {
 
-  //products: Observable<Product[]> | undefined;
   categories: Observable<Category[]> | undefined;
   providers: Observable<Provider[]> | undefined;
   products: Product[] = [];
@@ -33,8 +32,9 @@ export class ProductsComponent implements OnInit {
 
   public sendQuery() : void {
     this.productsService.GetAllProducts(this.params).subscribe(data => {
-      this.products = data.products;
-      this.metaData = data.pagination;
+      console.log(data.headers.get('pagination'));
+      this.products = data.body.products;
+      this.metaData = data.body.pagination;
     });
   }
 

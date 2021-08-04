@@ -1,4 +1,4 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { Product } from "../interfaces/interfaces";
@@ -10,7 +10,7 @@ export class ProductsService {
   constructor(private http: HttpClient) {}
 
   public GetAllProducts(params : any):Observable<any> {
-    return this.http.get<any>(`${this.pathBase}/get_all_products`, {params});
+    return this.http.get<any>(`${this.pathBase}/get_all_products`, {observe: 'response', params});
   }
 
   public GetProductById(id: any):Observable<Product> {

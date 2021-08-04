@@ -11,25 +11,46 @@ import { ProvidersService } from 'src/app/services/providers.service';
 })
 export class ProvidersComponent implements OnInit {
 
-  providers: Observable<Provider[]> | undefined;
-  //providers: Provider[] = [];
+  providers: Provider[] = [];
+  metaData: any;
 
-  private params = {
-    SearchTerm: ''
+  public params = {
+    SearchTerm: '',
+    PageNumber: 1
   }
 
   constructor(private router: Router,
     private providersService: ProvidersService) { }
 
   ngOnInit(): void {
-    //this.providersService.GetAllProviders(this.params).subscribe((data: Provider[]) => this.providers = data);
-    this.providers = this.providersService.GetAllProviders(this.params);
+    this.sendQuery();
+  }
+
+  public sendQuery() : void {
+    this.providersService.GetAllProviders(this.params).subscribe(data => {
+      console.log(data.headers.get('pagination'));
+      this.providers = data.body.providers;
+      this.metaData = data.body.pagination;
+    });
   }
 
   search(): void {
     this.params.SearchTerm = (<HTMLInputElement>document.getElementById('search')).value;
-    //this.providersService.GetAllProviders(this.params).subscribe((data: Provider[]) => this.providers = data);
-    this.providers = this.providersService.GetAllProviders(this.params);
+    this.sendQuery();
+  }
+
+  leftPage(): void {
+    if (this.params.PageNumber == 1) return;
+    this.params.PageNumber--;
+    this.sendQuery();
+  }
+
+  rightPage(): void {
+    this.params.PageNumber++;
+    if (this.params.PageNumber <= this.metaData.totalPages)
+      this.sendQuery();
+    else
+      this.leftPage();
   }
 
 }

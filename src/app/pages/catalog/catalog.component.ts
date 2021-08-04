@@ -35,8 +35,9 @@ export class CatalogComponent implements OnInit {
 
   private sendQuery() : void {
     this.productsService.GetAllProducts(this.params).subscribe(data => {
-      this.products = data.products;
-      this.metaData = data.pagination;
+      console.log(data.headers.get('pagination'));
+      this.products = data.body.products;
+      this.metaData = data.body.pagination;
     });
   }      
 
@@ -80,7 +81,11 @@ export class CatalogComponent implements OnInit {
   rightPage(): void {
     this.params.PageNumber++;
     if (this.params.PageNumber <= this.metaData.totalPages)
+    {
+      
       this.sendQuery();
+    }
+      
     else
       this.leftPage();
   }

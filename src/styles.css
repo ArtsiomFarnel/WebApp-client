@@ -67,3 +67,43 @@ a.navbar-brand {
     white-space: nowrap;
     line-height: 60px; /* Vertically center the text there */
   }
+
+  .pagination {
+    display: inline-block;
+  }
+  
+  .pagination a {
+    background-color: white;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    color: black;
+    border: 1px solid dimgray;
+  }
+  
+  .pagination a.active {
+    background-color: var(--dark-color);
+    color: white;
+  }
+  
+  .pagination a:hover:not(.active) {
+      background-color: dimgray;
+      color: white;
+    }
+
+    .account-form {
+      position: absolute;
+      width: 400px;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+      border: 1px solid dimgray;
+      text-align: center;
+      padding: 10px;
+  }
+
+  .form-control:focus {
+      border-color: dimgray;
+      box-shadow: 0px 1px 1px rgba(0, 0, 0, 0) inset, 0px 0px 8px rgba(0, 0, 0, 0);
+  }

@@ -14,7 +14,7 @@ export class CategoriesService {
   }
 
   public GetAllCategories(params : any):Observable<any> {
-    return this.http.get<any>(`${this.pathBase}/get_all_categories`, {params});
+    return this.http.get<any>(`${this.pathBase}/get_all_categories`, {observe: 'response', params});
   }
 
   public GetCategoryById(id: any):Observable<Category> {

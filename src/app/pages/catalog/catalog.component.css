@@ -1,0 +1,86 @@
+.control-menu {
+    float: left;
+    width: 300px;
+}
+
+.form-menu {
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    border: 1px solid dimgray;
+}
+
+.products {
+    list-style: none;
+    margin: 0 -20px 0 0;
+    padding: 0;
+}
+
+.product-wrapper {
+    display: block;
+    width: 100%;
+    float: left;
+    transition: width .2s;
+}
+
+@media only screen and (min-width: 450px) {
+    .product-wrapper {
+        width: 75%;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .product-wrapper {
+        width: 50%;
+    }
+}
+
+@media only screen and (min-width: 1000px) {
+    .product-wrapper {
+        width: 25%;
+    }
+}
+
+.product {
+    width: 200px;
+    display: inline-block;
+    border: 1px solid dimgray;
+    position: relative;
+    background: #fff;
+    margin: 0 10px 10px 0;
+    text-decoration: none;
+    z-index: 0;
+    box-sizing: border-box;
+    padding: 10px;
+}
+
+    .product:hover {
+        box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+    }
+
+.product-photo {
+    position: relative;
+    margin-top: 10px;
+    padding-bottom: 100%;
+    overflow: hidden;
+}
+
+    .product-photo img {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        max-width: 100%;
+        max-height: 100%;
+        margin: auto;
+        transition: transform .4s ease-out;
+    }
+
+.product:hover .product-photo img {
+    transform: scale(1.50);
+}
+
+.form-control:focus {
+    border-color: dimgray;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0) inset, 0px 0px 8px rgba(0, 0, 0, 0);
+}
