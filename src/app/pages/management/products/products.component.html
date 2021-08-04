@@ -1,4 +1,27 @@
 <style>
+    .pagination {
+    display: inline-block;
+  }
+  
+  .pagination a {
+    background-color: white;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    color: black;
+    border: 1px solid dimgray;
+  }
+  
+  .pagination a.active {
+    background-color: var(--dark-color);
+    color: white;
+  }
+  
+  .pagination a:hover:not(.active) {
+      background-color: dimgray;
+      color: white;
+    }
+
     .main-container {
         margin-right: 180px;
     }
@@ -17,8 +40,15 @@
 
 <div class="main-container">
     <div class="row no-gutters" style="border: 1px solid dimgray; box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);">
-        <div class="col-12 col-sm-6 col-md-8">
+        <div class="col-12 col-sm-6 col-md-6">
             <h4>Products List</h4>
+        </div>
+        <div class="col-6 col-md-2">
+            <div class="pagination">
+                <a (click)="leftPage()">&laquo;</a>
+                <a>{{this.params.PageNumber}}</a>
+                <a (click)="rightPage()">&raquo;</a>
+            </div>
         </div>
         <div class="col-6 col-md-2">
             <a class="btn btn-block btn-outline-dark" style="border-radius: 0px;">Add</a>
@@ -80,7 +110,7 @@
         </div>
     </div>
 
-    <div *ngIf="products | async as products$; else loading">
+    <div>
         <table class="table table-bordered table-sm">
             <thead>
                 <tr>
@@ -93,7 +123,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let product of products$">
+                <tr *ngFor="let product of products">
                     <td>{{product.Name}}</td>
                     <td>{{product.Description}}</td>
                     <td>{{product.Cost}}</td>

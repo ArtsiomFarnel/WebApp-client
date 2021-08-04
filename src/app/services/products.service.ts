@@ -9,8 +9,8 @@ export class ProductsService {
   public pathBase: string = "https://localhost:5001/v2/products";
   constructor(private http: HttpClient) {}
 
-  public GetAllProducts(params : any):Observable<Product[]> {
-    return this.http.get<Product[]>(`${this.pathBase}/get_all_products`, {params});
+  public GetAllProducts(params : any):Observable<any> {
+    return this.http.get<any>(`${this.pathBase}/get_all_products`, {params});
   }
 
   public GetProductById(id: any):Observable<Product> {
