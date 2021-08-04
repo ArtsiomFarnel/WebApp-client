@@ -13,8 +13,8 @@ export class ProvidersService {
     return this.http.get<Provider[]>(`${this.pathBase}/get_all_providers`);
   }
 
-  public GetAllProviders(params : any):Observable<Provider[]> {
-    return this.http.get<Provider[]>(`${this.pathBase}/get_all_providers`, {params});
+  public GetAllProviders(params : any):Observable<any> {
+    return this.http.get<any>(`${this.pathBase}/get_all_providers`, {params});
   }
 
   public GetProviderById(id: any):Observable<Provider> {

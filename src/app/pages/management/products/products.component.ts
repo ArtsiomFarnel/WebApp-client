@@ -31,12 +31,14 @@ export class ProductsComponent implements OnInit {
               private providersService: ProvidersService,
               private categoriesServie: CategoriesService) { }
 
-  private sendQuery() : void {
+  public sendQuery() : void {
     this.productsService.GetAllProducts(this.params).subscribe(data => {
       this.products = data.products;
       this.metaData = data.pagination;
     });
-  } 
+  }
+
+  
 
   ngOnInit(): void {
     

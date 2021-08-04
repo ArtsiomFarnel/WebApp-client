@@ -21,7 +21,6 @@ import { ManagementComponent } from './pages/management/management.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { AboutComponent } from './pages/about/about.component';
 import { PrivacyComponent } from './pages/privacy/privacy.component';
-import { PaginationComponent } from './layout/pagination/pagination.component';
 
 @NgModule({
   declarations: [
@@ -36,8 +35,7 @@ import { PaginationComponent } from './layout/pagination/pagination.component';
     ManagementComponent,
     ProfileComponent,
     AboutComponent,
-    PrivacyComponent,
-    PaginationComponent
+    PrivacyComponent
   ],
   imports: [
     BrowserModule,

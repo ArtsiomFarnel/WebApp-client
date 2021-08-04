@@ -13,8 +13,8 @@ export class CategoriesService {
     return this.http.get<Category[]>(`${this.pathBase}/get_all_categories`);
   }
 
-  public GetAllCategories(params : any):Observable<Category[]> {
-    return this.http.get<Category[]>(`${this.pathBase}/get_all_categories`, {params});
+  public GetAllCategories(params : any):Observable<any> {
+    return this.http.get<any>(`${this.pathBase}/get_all_categories`, {params});
   }
 
   public GetCategoryById(id: any):Observable<Category> {
