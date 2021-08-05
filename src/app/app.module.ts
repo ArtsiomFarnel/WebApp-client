@@ -24,7 +24,6 @@ import { FooterComponent } from './layouts/footer/footer.component';
 import { PaginationComponent } from './layouts/pagination/pagination.component';
 import { LoadingComponent } from './layouts/loading/loading.component';
 import { CatalogItemDetailComponent } from './pages/catalog/catalog-item-detail/catalog-item-detail.component';
-import { DetailComponent } from './pages/catalog/detail/detail.component';
 
 @NgModule({
   declarations: [
@@ -44,8 +43,7 @@ import { DetailComponent } from './pages/catalog/detail/detail.component';
     FooterComponent,
     PaginationComponent,
     LoadingComponent,
-    CatalogItemDetailComponent,
-    DetailComponent
+    CatalogItemDetailComponent
   ],
   imports: [
     BrowserModule,
