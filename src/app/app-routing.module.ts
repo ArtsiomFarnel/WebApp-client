@@ -20,12 +20,8 @@ const routes: Routes = [
   { path: "privacy", component: PrivacyComponent },
   { path: "login", component: LoginComponent },
   { path: "signup", component: SignupComponent },
-  { 
-    path: "catalog", component: CatalogComponent, 
-    children: [ 
-      { path: "item-detail/:id", component: CatalogItemDetailComponent } 
-    ] 
-  },
+  { path: "catalog", component: CatalogComponent },
+  { path: "catalog/item-detail/:id", component: CatalogItemDetailComponent },
   { path: "profile", component: ProfileComponent, canActivate: [AccountGuard] },
   { 
     path: "management", 
