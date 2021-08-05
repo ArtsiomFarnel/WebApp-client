@@ -5,7 +5,7 @@
       <div class="row">
         <h4 class="col-sm-8">Providers List</h4>
         <div class="col-sm-2">
-          <button type="button" class="btn btn-outline-dark" style="border-radius: 0px;" data-toggle="modal" data-target="#exampleModalCenter">
+          <button type="button" class="btn btn-outline-dark" style="border-radius: 0px;" data-toggle="modal" data-target="#addModal">
             Add
           </button>
         </div>
@@ -29,12 +29,23 @@
   <div class="items-container">
     <div *ngFor="let provider of providers">
       <div class="item-container" >
-        <div>
-          <span style="padding-right: 10px;">
-            <a class="btn btn-outline-dark" style="border-radius: 0px;">Update</a>
-            <a class="btn btn-outline-dark" style="border-radius: 0px;">Delete</a>
-          </span>
-          <b>Name: </b><span>{{provider.Name}}</span>
+        <div class="row">
+          <div style="padding-right: 10px;" class="col-sm-4">
+            <span >
+              <button (click)="putDataToUpdate(provider)" type="button" class="btn btn-outline-dark" style="border-radius: 0px;" data-toggle="modal" data-target="#updateModal">
+                Update
+              </button>
+              <button (click)="putDataToDelete(provider)" type="button" class="btn btn-outline-dark" style="border-radius: 0px;" data-toggle="modal" data-target="#deleteModal">
+                Delete
+              </button>
+            </span>
+          </div>
+          <div class="col-sm-2">
+            <b>Id: </b><span>{{provider.Id}}</span>
+          </div>
+          <div class="col-sm-6">
+            <b>Name: </b><span>{{provider.Name}}</span>
+          </div>
         </div>
       </div>
       <div style="margin-top: 10px"></div>
@@ -42,28 +53,93 @@
   </div>
 </div>
 
-<!--Modal-->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<!--Modal Add Item-->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalCenterTitle">Adding Category</h5>
+        <h5 class="modal-title" id="exampleModalCenterTitle">Adding Provider</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form [formGroup]="form" (ngSubmit)="addItem()">
-          <div class="form-group" [ngClass]="{invalid: form.get('name')?.touched && form.get('name')?.invalid}">
+        <form [formGroup]="addForm" (ngSubmit)="addItem()">
+          <div class="form-group" [ngClass]="{invalid: addForm.get('name')?.touched && addForm.get('name')?.invalid}">
             <label class="col-form-label" style="font-weight: bold" for="name">Name: </label>
             <input class="form-control" style="border-radius: 0px;" id="name" type="text" formControlName="name">
-            <div class="validation" *ngIf="form.get('name')?.touched && form.get('name')?.invalid">
-              <small *ngIf="form.get('name')?.errors?.required">Enter field.</small>
-              <small *ngIf="form.get('name')?.errors?.email">Invalid field.</small>
+            <div class="validation" *ngIf="addForm.get('name')?.touched && addForm.get('name')?.invalid">
+              <small *ngIf="addForm.get('name')?.errors?.required">Enter field.</small>
+              <small *ngIf="addForm.get('name')?.errors?.email">Invalid field.</small>
             </div>
           </div>
           <div class="form-group">
-            <button type="submit" (click)="addItem()" class="btn btn-outline-dark" style="border-radius: 0px;" [disabled]="form?.invalid || submitted" data-dismiss="modal">Add</button>
+            <button type="submit" (click)="addItem()" class="btn btn-outline-dark" style="border-radius: 0px;" [disabled]="addForm?.invalid || submitted" data-dismiss="modal">Add</button>
+            <button type="button" class="btn btn-outline-danger" style="border-radius: 0px;" data-dismiss="modal">Close</button>
+          </div>
+        </form>
+      </div>
+      <!--<div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>-->
+    </div>
+  </div>
+</div>
+
+<!--Modal Update Item-->
+<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">Update Provider</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="updateForm" (ngSubmit)="updateItem()">
+          <div class="form-group" [ngClass]="{invalid: updateForm.get('oldname')?.touched && updateForm.get('oldname')?.invalid}">
+            <label class="col-form-label" style="font-weight: bold" for="oldname">Name: </label>
+            <input class="form-control" style="border-radius: 0px;" id="oldname" type="text" formControlName="oldname">
+            <input class="form-control" style="border-radius: 0px;" id="updateid" type="number" hidden formControlName="updateid">
+            <div class="validation" *ngIf="updateForm.get('oldname')?.touched && updateForm.get('oldname')?.invalid">
+              <small *ngIf="updateForm.get('oldname')?.errors?.required">Enter field.</small>
+              <small *ngIf="updateForm.get('oldname')?.errors?.email">Invalid field.</small>
+            </div>
+          </div>
+          <div class="form-group">
+            <button type="submit" (click)="updateItem()" class="btn btn-outline-dark" style="border-radius: 0px;" [disabled]="updateForm?.invalid || submitted" data-dismiss="modal">Update</button>
+            <button type="button" class="btn btn-outline-danger" style="border-radius: 0px;" data-dismiss="modal">Close</button>
+          </div>
+        </form>
+      </div>
+      <!--<div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>-->
+    </div>
+  </div>
+</div>
+
+<!--Modal Delete Item-->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">Delete Provider</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="deleteForm" (ngSubmit)="deleteItem()">
+          <div class="form-group">
+            <label class="col-form-label" style="font-weight: bold">Are You shure? </label>
+            <input class="form-control" style="border-radius: 0px;" id="deleteid" type="number" hidden formControlName="deleteid">
+          </div>
+          <div class="form-group">
+            <button type="submit" (click)="deleteItem()" class="btn btn-outline-dark" style="border-radius: 0px;" [disabled]="deleteForm?.invalid || submitted" data-dismiss="modal">Delete</button>
             <button type="button" class="btn btn-outline-danger" style="border-radius: 0px;" data-dismiss="modal">Close</button>
           </div>
         </form>

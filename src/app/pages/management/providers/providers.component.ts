@@ -22,10 +22,10 @@ export class ProvidersComponent implements OnInit {
     CurrentPage: 0
   };
 
-  public form: FormGroup = new FormGroup({
-    title: new FormControl(''),
-    description: new FormControl('')
-  });
+  public addForm: FormGroup = new FormGroup({});
+  public updateForm: FormGroup = new FormGroup({});
+  public deleteForm: FormGroup = new FormGroup({});
+
   public submitted = false;
   public message: string = '';
 
@@ -40,8 +40,15 @@ export class ProvidersComponent implements OnInit {
 
   ngOnInit(): void {
     this.sendQuery();
-    this.form = new FormGroup({
+    this.addForm = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.minLength(4)])
+    });
+    this.updateForm = new FormGroup({
+      oldname: new FormControl('', [Validators.required, Validators.minLength(4)]),
+      updateid: new FormControl()
+    });
+    this.deleteForm = new FormGroup({
+      deleteid: new FormControl()
     });
   }
 
@@ -57,13 +64,41 @@ export class ProvidersComponent implements OnInit {
     this.sendQuery();
   }
 
-  public addItem(): void {
-    if (this.form.invalid) return;
+  public putDataToUpdate(provider: Provider): void {
+    this.updateForm.controls['oldname'].setValue(provider.Name);
+    this.updateForm.controls['updateid'].setValue(provider.Id);
+  }
+
+  public putDataToDelete(provider: Provider): void {
+    this.deleteForm.controls['deleteid'].setValue(provider.Id);
+  }
+
+  public updateItem(): void {
+    if (this.updateForm.invalid) return;
     
     this.submitted = true;
 
     const provider: Provider = {
-      Name: this.form.value.name
+      Name: this.updateForm.value.oldname,
+      Id: this.updateForm.value.updateid
+    };
+    this.providersService.UpdateProvider(provider).subscribe();
+  }
+
+  public deleteItem(): void {
+    if (this.deleteForm.invalid) return;
+    
+    this.submitted = true;
+    this.providersService.DeleteProvider( this.deleteForm.value.deleteid).subscribe();
+  }
+
+  public addItem(): void {
+    if (this.addForm.invalid) return;
+    
+    this.submitted = true;
+
+    const provider: Provider = {
+      Name: this.addForm.value.name
     };
 
     this.providersService.AddProvider(provider).subscribe();

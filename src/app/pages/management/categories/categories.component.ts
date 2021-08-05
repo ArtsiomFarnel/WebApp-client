@@ -21,10 +21,10 @@ export class CategoriesComponent implements OnInit {
     CurrentPage: 0
   };
 
-  public form: FormGroup = new FormGroup({
-    title: new FormControl(''),
-    description: new FormControl('')
-  });
+  public addForm: FormGroup = new FormGroup({});
+  public updateForm: FormGroup = new FormGroup({});
+  public deleteForm: FormGroup = new FormGroup({});
+
   public submitted = false;
   public message: string = '';
   
@@ -37,8 +37,15 @@ export class CategoriesComponent implements OnInit {
 
   ngOnInit(): void {
     this.sendQuery();
-    this.form = new FormGroup({
+    this.addForm = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.minLength(4)])
+    });
+    this.updateForm = new FormGroup({
+      oldname: new FormControl('', [Validators.required, Validators.minLength(4)]),
+      updateid: new FormControl()
+    });
+    this.deleteForm = new FormGroup({
+      deleteid: new FormControl()
     });
   }
 
@@ -54,13 +61,41 @@ export class CategoriesComponent implements OnInit {
     this.sendQuery();
   }
 
-  public addItem(): void {
-    if (this.form.invalid) return;
+  public putDataToUpdate(category: Category): void {
+    this.updateForm.controls['oldname'].setValue(category.Name);
+    this.updateForm.controls['updateid'].setValue(category.Id);
+  }
+
+  public putDataToDelete(category: Category): void {
+    this.deleteForm.controls['deleteid'].setValue(category.Id);
+  }
+
+  public updateItem(): void {
+    if (this.updateForm.invalid) return;
     
     this.submitted = true;
 
     const category: Category = {
-      Name: this.form.value.name
+      Name: this.updateForm.value.oldname,
+      Id: this.updateForm.value.updateid
+    };
+    this.categoriesService.UpdateCategory(category).subscribe();
+  }
+
+  public deleteItem(): void {
+    if (this.deleteForm.invalid) return;
+    
+    this.submitted = true;
+    this.categoriesService.DeleteCategory( this.deleteForm.value.deleteid).subscribe();
+  }
+
+  public addItem(): void {
+    if (this.addForm.invalid) return;
+    
+    this.submitted = true;
+
+    const category: Category = {
+      Name: this.addForm.value.name
     };
 
     this.categoriesService.AddCategory(category).subscribe();
