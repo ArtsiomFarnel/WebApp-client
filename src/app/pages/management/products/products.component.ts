@@ -15,8 +15,8 @@ import { ProvidersService } from 'src/app/services/providers.service';
 })
 export class ProductsComponent implements OnInit {
 
-  public categories: Observable<Category[]> | undefined;
-  public providers: Observable<Provider[]> | undefined;
+  public categories$: Observable<Category[]> | undefined;
+  public providers$: Observable<Provider[]> | undefined;
   public products: Product[] = [];
 
   public metaData: Pagination = {
@@ -44,15 +44,15 @@ export class ProductsComponent implements OnInit {
 
   private sendQuery(): void {
     this.productsService.GetAllProducts(this.params).subscribe(data => {
-      this.products = data.body.products;
+      this.products = data.body;
       this.metaData = JSON.parse(data.headers.get('pagination'));
     });
   }
-
+  provider: Provider[] = [];
   ngOnInit(): void {
     this.sendQuery();
-    this.providers = this.providersService.GetProviders();
-    this.categories = this.categoriesServie.GetCategories();
+    this.providers$ = this.providersService.GetProviders();
+    this.categories$ = this.categoriesServie.GetCategories();
   }
 
   public search(): void {

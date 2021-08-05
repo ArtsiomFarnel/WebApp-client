@@ -45,7 +45,7 @@ export class CatalogComponent implements OnInit {
 
   private sendQuery(): void {
     this.productsService.GetAllProducts(this.params).subscribe(data => {
-      this.products = data.body.products;
+      this.products = data.body;
       this.metaData = JSON.parse(data.headers.get('pagination'));
     });
   }      

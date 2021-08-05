@@ -44,7 +44,7 @@ export class CategoriesComponent implements OnInit {
 
   public sendQuery(): void {
     this.categoriesService.GetAllCategories(this.params).subscribe(data => {
-      this.categories = data.body.categories;
+      this.categories = data.body;
       this.metaData = JSON.parse(data.headers.get('pagination'));
     });
   }

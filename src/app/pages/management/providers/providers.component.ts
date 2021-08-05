@@ -47,8 +47,7 @@ export class ProvidersComponent implements OnInit {
 
   private sendQuery(): void {
     this.providersService.GetAllProviders(this.params).subscribe(data => {
-      console.log(data.headers.get('pagination'));
-      this.providers = data.body.providers;
+      this.providers = data.body;
       this.metaData = JSON.parse(data.headers.get('pagination'));
     });
   }

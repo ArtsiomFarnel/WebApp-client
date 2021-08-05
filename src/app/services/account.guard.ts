@@ -14,7 +14,7 @@ export class AccountGuard implements CanActivate {
     if (this.authService.isAuthenticated()) return true;
     else {
       this.authService.logout();
-      this.router.navigate(['/login'], {
+      this.router.navigate(['login'], {
         queryParams: {
           loginAgain: true
         }
