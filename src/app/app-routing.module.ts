@@ -13,6 +13,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { AboutComponent } from './pages/about/about.component';
 import { PrivacyComponent } from './pages/privacy/privacy.component';
 import { CatalogItemDetailComponent } from './pages/catalog/catalog-item-detail/catalog-item-detail.component';
+import { DetailComponent } from './pages/catalog/detail/detail.component';
 
 const routes: Routes = [
   { path: "", component: HomeComponent },
@@ -20,7 +21,12 @@ const routes: Routes = [
   { path: "privacy", component: PrivacyComponent },
   { path: "login", component: LoginComponent },
   { path: "signup", component: SignupComponent },
-  { path: "catalog", component: CatalogComponent, children: [ { path: "item-detail/:item-id", component: CatalogItemDetailComponent } ] },
+  { 
+    path: "catalog", component: CatalogComponent, 
+    children: [ 
+      { path: "detail/:id", component: DetailComponent } 
+    ] 
+  },
   { path: "profile", component: ProfileComponent, canActivate: [AccountGuard] },
   { 
     path: "management", 
