@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { UserSignup } from 'src/app/interfaces/interfaces';
+import { UserSignup } from 'src/app/interfaces/account.interfaces';
 import { AccountService } from 'src/app/services/account.service';
 
 @Component({

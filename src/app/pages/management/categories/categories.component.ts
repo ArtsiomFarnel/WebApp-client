@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { Category, Pagination } from 'src/app/interfaces/interfaces';
+import { Category } from 'src/app/interfaces/categories.interfaces';
+import { Pagination } from 'src/app/interfaces/pagination.interfaces';
 import { CategoriesService } from 'src/app/services/categories.service';
 
 @Component({

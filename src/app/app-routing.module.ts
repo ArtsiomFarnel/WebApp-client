@@ -8,7 +8,7 @@ import { ManagementComponent } from './pages/management/management.component';
 import { ProductsComponent } from './pages/management/products/products.component';
 import { ProvidersComponent } from './pages/management/providers/providers.component';
 import { SignupComponent } from './pages/signup/signup.component';
-import { AuthGuard } from './services/account.guard';
+import { AccountGuard } from './services/account.guard';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { AboutComponent } from './pages/about/about.component';
 import { PrivacyComponent } from './pages/privacy/privacy.component';
@@ -20,7 +20,7 @@ const routes: Routes = [
   { path: "login", component: LoginComponent },
   { path: "signup", component: SignupComponent },
   { path: "catalog", component: CatalogComponent },
-  { path: "profile", component: ProfileComponent, canActivate: [AuthGuard] },
+  { path: "profile", component: ProfileComponent, canActivate: [AccountGuard] },
   { 
     path: "management", 
     component: ManagementComponent, 
@@ -29,7 +29,7 @@ const routes: Routes = [
       { path: "categories", component: CategoriesComponent },
       { path: "products", component: ProductsComponent },
     ], 
-    canActivate: [AuthGuard] 
+    canActivate: [AccountGuard] 
   },
   { path: "**", redirectTo: "", pathMatch: "full" }
 ];

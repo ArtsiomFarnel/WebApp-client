@@ -6,7 +6,7 @@ import { catchError } from "rxjs/operators";
 import { AccountService } from './account.service';
 
 @Injectable()
-export class AuthInterseptor implements HttpInterceptor {
+export class AccountInterseptor implements HttpInterceptor {
 
   constructor(
     private authService: AccountService,

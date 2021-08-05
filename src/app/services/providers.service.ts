@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { Provider } from "../interfaces/interfaces";
+import { Provider } from "../interfaces/providers.interfaces";
 
 @Injectable({providedIn: 'root'})
 export class ProvidersService {

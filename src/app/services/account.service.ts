@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, Subject, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
-import { UserLogin, UserSignup } from '../interfaces/interfaces';
+import { UserLogin, UserSignup } from '../interfaces/account.interfaces';
 
 @Injectable({providedIn: 'root'})
 export class AccountService {

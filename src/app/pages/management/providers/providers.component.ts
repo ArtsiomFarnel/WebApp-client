@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { Pagination, Provider } from 'src/app/interfaces/interfaces';
 import { ProvidersService } from 'src/app/services/providers.service';
+import { Pagination } from 'src/app/interfaces/pagination.interfaces';
+import { Provider } from 'src/app/interfaces/providers.interfaces';
 
 @Component({
   selector: 'app-providers',

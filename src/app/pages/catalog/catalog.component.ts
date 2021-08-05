@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Category, Pagination, Product, Provider } from 'src/app/interfaces/interfaces';
+import { Category } from 'src/app/interfaces/categories.interfaces';
+import { Pagination } from 'src/app/interfaces/pagination.interfaces';
+import { Product } from 'src/app/interfaces/products.interfaces';
+import { Provider } from 'src/app/interfaces/providers.interfaces';
 import { CategoriesService } from 'src/app/services/categories.service';
 import { ProductsService } from 'src/app/services/products.service';
 import { ProvidersService } from 'src/app/services/providers.service';
