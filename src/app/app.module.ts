@@ -23,6 +23,7 @@ import { HeaderComponent } from './layouts/header/header.component';
 import { FooterComponent } from './layouts/footer/footer.component';
 import { PaginationComponent } from './layouts/pagination/pagination.component';
 import { LoadingComponent } from './layouts/loading/loading.component';
+import { CatalogItemDetailComponent } from './pages/catalog/catalog-item-detail/catalog-item-detail.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { LoadingComponent } from './layouts/loading/loading.component';
     HeaderComponent,
     FooterComponent,
     PaginationComponent,
-    LoadingComponent
+    LoadingComponent,
+    CatalogItemDetailComponent
   ],
   imports: [
     BrowserModule,
