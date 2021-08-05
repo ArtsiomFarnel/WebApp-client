@@ -11,24 +11,24 @@ import { AccountService } from 'src/app/services/account.service';
 })
 export class SignupComponent implements OnInit {
 
-  form: FormGroup = new FormGroup({
+  public form: FormGroup = new FormGroup({
     title: new FormControl(''),
     description: new FormControl('')
   });
-  submitted = false;
-  message: string = '';
+  public submitted: boolean = false;
+  public message: string = '';
 
-  constructor(public authService: AccountService,
-              private router: Router,
-              private route: ActivatedRoute) { }
+  constructor(
+    public authService: AccountService,
+    private router: Router,
+    private route: ActivatedRoute) { }
 
-  ngOnInit() {
-    this.route.queryParams.subscribe( (params: Params) => {
-      if (params.loginAgain) {
+  ngOnInit(): void {
+    this.route.queryParams.subscribe((params: Params) => {
+      if (params.loginAgain)
         this.message = 'Please, enter data';
-      } else if (params.authFailed) {
+      else if (params.authFailed)
         this.message = 'Session ended. Enter data again.';
-      }
     });
 
     this.form = new FormGroup({
@@ -42,17 +42,13 @@ export class SignupComponent implements OnInit {
     });
   }
 
-  submit() {
-    if (this.form.invalid) {
-      return;
-    }
-
-    if (this.form.value.password != this.form.value.confirmpassword)
-      return;
+  public submit(): void {
+    if (this.form.invalid) return;
+    if (this.form.value.password != this.form.value.confirmpassword) return;
     
     this.submitted = true;
 
-    const admin: UserSignup = {
+    const user: UserSignup = {
       UserName: this.form.value.login,
       Password: this.form.value.password,
       FirstName: this.form.value.firstname,
@@ -63,7 +59,7 @@ export class SignupComponent implements OnInit {
       Roles: ["Client"],
     };
 
-    this.authService.signup(admin).subscribe(() => {
+    this.authService.signup(user).subscribe(() => {
       this.form.reset();
       this.router.navigate(['/']);
       this.submitted = false;
@@ -71,5 +67,4 @@ export class SignupComponent implements OnInit {
       this.submitted = false;
     });
   }
-
 }

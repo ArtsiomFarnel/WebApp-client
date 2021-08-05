@@ -1,0 +1,13 @@
+.nav-panel-container {
+  width: 160px;
+  height: 140px;
+  border: 1px solid dimgray;
+  float: right;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+  text-align: center;
+}
+
+.nav-panel-menu {
+  padding: 10px;
+  display: inline-block
+}

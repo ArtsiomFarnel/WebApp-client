@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { Category } from 'src/app/interfaces/interfaces';
+import { Category, Pagination } from 'src/app/interfaces/interfaces';
 import { CategoriesService } from 'src/app/services/categories.service';
 
 @Component({
@@ -11,15 +11,22 @@ import { CategoriesService } from 'src/app/services/categories.service';
 })
 export class CategoriesComponent implements OnInit {
 
-  categories: Category[] = [];
-  metaData: any;
+  public categories: Category[] = [];
+  public metaData: Pagination = {
+    TotalPages: 0,
+    TotalCount: 0,
+    PageSize: 0,
+    HasNext: false,
+    HasPrevious: false,
+    CurrentPage: 0
+  };
 
-  form: FormGroup = new FormGroup({
+  public form: FormGroup = new FormGroup({
     title: new FormControl(''),
     description: new FormControl('')
   });
-  submitted = false;
-  message: string = '';
+  public submitted = false;
+  public message: string = '';
   
   public params = {
     SearchTerm: '',
@@ -30,31 +37,26 @@ export class CategoriesComponent implements OnInit {
 
   ngOnInit(): void {
     this.sendQuery();
-
     this.form = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.minLength(4)])
     });
   }
 
-  sendQuery(): void {
+  public sendQuery(): void {
     this.categoriesService.GetAllCategories(this.params).subscribe(data => {
-      console.log(data.headers.get('pagination'));
       this.categories = data.body.categories;
-      this.metaData = data.body.pagination;
-    });;
+      this.metaData = JSON.parse(data.headers.get('pagination'));
+    });
   }
 
-  search(): void {
+  public search(): void {
     this.params.SearchTerm = (<HTMLInputElement>document.getElementById('search')).value;
     this.sendQuery();
-
   }
 
-  addItem(): void {
-    if (this.form.invalid) {
-      return;
-    }
-
+  public addItem(): void {
+    if (this.form.invalid) return;
+    
     this.submitted = true;
 
     const category: Category = {
@@ -64,18 +66,15 @@ export class CategoriesComponent implements OnInit {
     this.categoriesService.AddCategory(category).subscribe();
   }
 
-
-leftPage(): void {
+  public leftPage(): void {
     if (this.params.PageNumber == 1) return;
     this.params.PageNumber--;
     this.sendQuery();
   }
 
-  rightPage(): void {
+  public rightPage(): void {
     this.params.PageNumber++;
-    if (this.params.PageNumber <= this.metaData.totalPages)
-      this.sendQuery();
-    else
-      this.leftPage();
+    if (this.params.PageNumber <= this.metaData.TotalPages) this.sendQuery();
+    else this.leftPage();
   }
 }

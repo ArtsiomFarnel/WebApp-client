@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Category, Product, Provider } from 'src/app/interfaces/interfaces';
+import { Category, Pagination, Product, Provider } from 'src/app/interfaces/interfaces';
 import { CategoriesService } from 'src/app/services/categories.service';
 import { ProductsService } from 'src/app/services/products.service';
 import { ProvidersService } from 'src/app/services/providers.service';
@@ -12,10 +12,18 @@ import { ProvidersService } from 'src/app/services/providers.service';
 })
 export class ProductsComponent implements OnInit {
 
-  categories: Observable<Category[]> | undefined;
-  providers: Observable<Provider[]> | undefined;
-  products: Product[] = [];
-  metaData: any;
+  public categories: Observable<Category[]> | undefined;
+  public providers: Observable<Provider[]> | undefined;
+  public products: Product[] = [];
+
+  public metaData: Pagination = {
+    TotalPages: 0,
+    TotalCount: 0,
+    PageSize: 0,
+    HasNext: false,
+    HasPrevious: false,
+    CurrentPage: 0
+  };
 
   public params = {
     SearchTerm: '',
@@ -26,63 +34,58 @@ export class ProductsComponent implements OnInit {
     PageNumber: 1
   }
 
-  constructor(private productsService: ProductsService,
-              private providersService: ProvidersService,
-              private categoriesServie: CategoriesService) { }
+  constructor(
+    private productsService: ProductsService,
+    private providersService: ProvidersService,
+    private categoriesServie: CategoriesService) { }
 
-  public sendQuery() : void {
+  private sendQuery(): void {
     this.productsService.GetAllProducts(this.params).subscribe(data => {
-      console.log(data.headers.get('pagination'));
       this.products = data.body.products;
-      this.metaData = data.body.pagination;
+      this.metaData = JSON.parse(data.headers.get('pagination'));
     });
   }
 
-  
-
   ngOnInit(): void {
-    
     this.sendQuery();
     this.providers = this.providersService.GetProviders();
     this.categories = this.categoriesServie.GetCategories();
   }
 
-  search(): void {
+  public search(): void {
     this.params.SearchTerm = (<HTMLInputElement>document.getElementById('search')).value;
     this.sendQuery();
   }
 
-  currencyChange(): void {
+  public currencyChange(): void {
     this.params.Currency = (<HTMLInputElement>document.getElementById('currency')).value;
     this.sendQuery();
   }
 
-  order(): void {
+  public order(): void {
     this.params.OrderBy = (<HTMLInputElement>document.getElementById('order')).value;
     this.sendQuery();
   }
 
-  setCategory() : void {
+  public setCategory(): void {
     this.params.CategoryId = Number((<HTMLInputElement>document.getElementById('category')).value);
     this.sendQuery();
   }
 
-  setProvider() : void {
+  public setProvider(): void {
     this.params.ProviderId = Number((<HTMLInputElement>document.getElementById('provider')).value);
     this.sendQuery();
   }
 
-  leftPage(): void {
+  public leftPage(): void {
     if (this.params.PageNumber == 1) return;
     this.params.PageNumber--;
     this.sendQuery();
   }
 
-  rightPage(): void {
+  public rightPage(): void {
     this.params.PageNumber++;
-    if (this.params.PageNumber <= this.metaData.totalPages)
-      this.sendQuery();
-    else
-      this.leftPage();
+    if (this.params.PageNumber <= this.metaData.TotalPages) this.sendQuery();
+    else this.leftPage();
   }
 }

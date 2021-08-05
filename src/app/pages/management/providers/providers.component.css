@@ -1,35 +1,29 @@
 .main-container {
-    margin-right: 180px;
+  margin-right: 180px;
 }
 
 .control-menu {
-    float: left;
-    width: 300px;
+  float: left;
+  width: 300px;
 }
 
 .form-menu {
-    box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
-    padding: 10px;
-    border: 1px solid dimgray;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+  padding: 10px;
+  border: 1px solid dimgray;
 }
 
 .items-container {
-    float: left;
-    margin-left: 20px;
-    margin-bottom: 60px;
+  float: left;
+  margin-left: 20px;
+  margin-bottom: 60px;
 }
 
 .item-container {
-    padding: 10px;
-    border: 1px solid dimgray;
-    width: 600px;
+  padding: 10px;
+  border: 1px solid dimgray;
+  width: 600px;
 }
-
-    .item-container:hover {
-        box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
-    }
-
-.form-control:focus {
-    border-color: dimgray;
-    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0) inset, 0px 0px 8px rgba(0, 0, 0, 0);
-}
+  .item-container:hover {
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+  }

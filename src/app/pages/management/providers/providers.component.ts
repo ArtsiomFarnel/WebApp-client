@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Provider } from 'src/app/interfaces/interfaces';
+import { Pagination, Provider } from 'src/app/interfaces/interfaces';
 import { ProvidersService } from 'src/app/services/providers.service';
 
 @Component({
@@ -11,46 +12,73 @@ import { ProvidersService } from 'src/app/services/providers.service';
 })
 export class ProvidersComponent implements OnInit {
 
-  providers: Provider[] = [];
-  metaData: any;
+  public providers: Provider[] = [];
+  public metaData: Pagination = {
+    TotalPages: 0,
+    TotalCount: 0,
+    PageSize: 0,
+    HasNext: false,
+    HasPrevious: false,
+    CurrentPage: 0
+  };
+
+  public form: FormGroup = new FormGroup({
+    title: new FormControl(''),
+    description: new FormControl('')
+  });
+  public submitted = false;
+  public message: string = '';
 
   public params = {
     SearchTerm: '',
     PageNumber: 1
   }
 
-  constructor(private router: Router,
+  constructor(
+    private router: Router,
     private providersService: ProvidersService) { }
 
   ngOnInit(): void {
     this.sendQuery();
-  }
-
-  public sendQuery() : void {
-    this.providersService.GetAllProviders(this.params).subscribe(data => {
-      console.log(data.headers.get('pagination'));
-      this.providers = data.body.providers;
-      this.metaData = data.body.pagination;
+    this.form = new FormGroup({
+      name: new FormControl('', [Validators.required, Validators.minLength(4)])
     });
   }
 
-  search(): void {
+  private sendQuery(): void {
+    this.providersService.GetAllProviders(this.params).subscribe(data => {
+      console.log(data.headers.get('pagination'));
+      this.providers = data.body.providers;
+      this.metaData = JSON.parse(data.headers.get('pagination'));
+    });
+  }
+
+  public search(): void {
     this.params.SearchTerm = (<HTMLInputElement>document.getElementById('search')).value;
     this.sendQuery();
   }
 
-  leftPage(): void {
+  public addItem(): void {
+    if (this.form.invalid) return;
+    
+    this.submitted = true;
+
+    const provider: Provider = {
+      Name: this.form.value.name
+    };
+
+    this.providersService.AddProvider(provider).subscribe();
+  }
+
+  public leftPage(): void {
     if (this.params.PageNumber == 1) return;
     this.params.PageNumber--;
     this.sendQuery();
   }
 
-  rightPage(): void {
+  public rightPage(): void {
     this.params.PageNumber++;
-    if (this.params.PageNumber <= this.metaData.totalPages)
-      this.sendQuery();
-    else
-      this.leftPage();
+    if (this.params.PageNumber <= this.metaData.TotalPages) this.sendQuery();
+    else this.leftPage();
   }
-
 }

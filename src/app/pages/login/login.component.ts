@@ -12,18 +12,19 @@ import { AccountService } from 'src/app/services/account.service';
 })
 export class LoginComponent implements OnInit {
   
-  form: FormGroup = new FormGroup({
+  public form: FormGroup = new FormGroup({
     title: new FormControl(''),
     description: new FormControl('')
   });
-  submitted = false;
-  message: string = '';
+  public submitted = false;
+  public message: string = '';
 
-  constructor(public authService: AccountService,
-              private router: Router,
-              private route: ActivatedRoute) { }
+  constructor(
+    public authService: AccountService,
+    private router: Router,
+    private route: ActivatedRoute) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.route.queryParams.subscribe( (params: Params) => {
       if (params.loginAgain) {
         this.message = 'Please, enter data';
@@ -38,19 +39,17 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  submit() {
-    if (this.form.invalid) {
-      return;
-    }
-
+  public submit(): void {
+    if (this.form.invalid) return;
+    
     this.submitted = true;
 
-    const admin: UserLogin = {
+    const user: UserLogin = {
       UserName: this.form.value.login,
       Password: this.form.value.password
     };
 
-    this.authService.login(admin).subscribe(() => {
+    this.authService.login(user).subscribe(() => {
       this.form.reset();
       this.router.navigate(['/']);
       this.submitted = false;

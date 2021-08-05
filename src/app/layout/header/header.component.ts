@@ -8,13 +8,12 @@ import { AccountService } from 'src/app/services/account.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(public authService: AccountService) { }
+  constructor(public accountService: AccountService) { }
 
   ngOnInit(): void {
   }
 
-  logOut() {
-    this.authService.logout();
+  public logOut(): void {
+    this.accountService.logout();
   }
-
 }
