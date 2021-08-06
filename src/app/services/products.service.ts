@@ -1,7 +1,7 @@
 import { HttpClient, HttpResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { Product } from "../interfaces/products.interfaces";
+import { Product, ProductDTO } from "../interfaces/products.interfaces";
 
 @Injectable({providedIn: 'root'})
 export class ProductsService {
@@ -18,12 +18,12 @@ export class ProductsService {
     return this.http.get<Product>(`${this.pathBase}get_product/${id}`);
   }
 
-  public AddProduct(product: Product): Observable<Product> {
-    return this.http.post<Product>(`${this.pathBase}add_product`, product);
+  public AddProduct(product: ProductDTO): Observable<ProductDTO> {
+    return this.http.post<ProductDTO>(`${this.pathBase}add_product`, product);
   }
 
-  public UpdateProduct(product: Product): Observable<Product> {
-    return this.http.put<Product>(`${this.pathBase}update_product/${product.Id}`, product);
+  public UpdateProduct(product: ProductDTO): Observable<ProductDTO> {
+    return this.http.put<ProductDTO>(`${this.pathBase}update_product/${product.Id}`, product);
   }
 
   public DeleteProduct(id: any): Observable<any> {

@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { Category } from 'src/app/interfaces/categories.interfaces';
 import { Pagination } from 'src/app/interfaces/pagination.interfaces';
-import { Product } from 'src/app/interfaces/products.interfaces';
+import { Product, ProductDTO } from 'src/app/interfaces/products.interfaces';
 import { Provider } from 'src/app/interfaces/providers.interfaces';
 import { CategoriesService } from 'src/app/services/categories.service';
 import { ProductsService } from 'src/app/services/products.service';
@@ -124,17 +124,17 @@ export class ProductsComponent implements OnInit {
     
     this.submitted = true;
 
-    /*
-    const product: Product = {
+    
+    const product: ProductDTO = {
       Name: this.updateForm.value.oldname,
       Id: this.updateForm.value.updateid,
-      Description: this.updateForm.value.olddescription,
       Cost: this.updateForm.value.oldcost,
-      // cat id
-      // prov id
+      Description: this.updateForm.value.olddescription,
+      CategoryId: this.updateForm.value.oldcategoryid,
+      ProviderId: this.updateForm.value.oldproviderid
     };
     this.productsService.UpdateProduct(product).subscribe();
-    */
+    
   }
 
   public deleteItem(): void {
@@ -149,17 +149,16 @@ export class ProductsComponent implements OnInit {
     
     this.submitted = true;
 
-    /*
-    const product: Product = {
-      Name: this.updateForm.value.oldname,
-      Id: this.updateForm.value.updateid,
-      Description: this.updateForm.value.olddescription,
-      Cost: this.updateForm.value.oldcost,
-      // cat id
-      // prov id
+    const product: ProductDTO = {
+      Name: this.addForm.value.name,
+      Id: this.addForm.value.updateid,
+      Description: this.addForm.value.description,
+      Cost: this.addForm.value.cost,
+      CategoryId: this.addForm.value.categoryid,
+      ProviderId: this.addForm.value.providerid
     };
     this.productsService.AddProduct(product).subscribe();
-    */
+
   }
 
   public leftPage(): void {
