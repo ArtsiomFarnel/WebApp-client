@@ -11,7 +11,9 @@
       </div>
     </div>
     <div class="col-6 col-md-2">
-      <a class="btn btn-block btn-outline-dark" style="border-radius: 0px;">Add</a>
+      <button type="button" class="btn btn-outline-dark" style="border-radius: 0px;" data-toggle="modal" data-target="#addModal">
+        Add
+      </button>
     </div>
     <div class="col-6 col-md-2">
       <button class="btn btn-block btn-outline-dark" style="border-radius: 0px;" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Filters</button>
@@ -90,13 +92,160 @@
           <td>{{product.Provider}}</td>
           <td>
             <div style="display: inline-block" class="btn-group-vertical btn-block">
-              <a class="btn btn-outline-dark" style="border-radius: 0px;">Update</a><br />
-              <a class="btn btn-outline-dark" style="border-radius: 0px;">Delete</a>
+              <button (click)="putDataToUpdate(product)" type="button" class="btn btn-outline-dark" style="border-radius: 0px;" data-toggle="modal" data-target="#updateModal">
+                Update
+              </button><br>
+              <button (click)="putDataToDelete(product)" type="button" class="btn btn-outline-dark" style="border-radius: 0px;" data-toggle="modal" data-target="#deleteModal">
+                Delete
+              </button>
             </div>
           </td>
         </tr>
       </tbody>
     </table>
+  </div>
+</div>
+
+<!--Modal Add Item-->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">Adding Provider</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="addForm" (ngSubmit)="addItem()">
+          <div class="form-group" [ngClass]="{invalid: addForm.get('name')?.touched && addForm.get('name')?.invalid}">
+            <label class="col-form-label" style="font-weight: bold" for="name">Name: </label>
+            <input class="form-control" style="border-radius: 0px;" id="name" type="text" formControlName="name">
+            <div class="validation" *ngIf="addForm.get('name')?.touched && addForm.get('name')?.invalid">
+              <small *ngIf="addForm.get('name')?.errors?.required">Enter field.</small>
+            </div>
+          </div>
+          <div class="form-group" [ngClass]="{invalid: addForm.get('cost')?.touched && addForm.get('cost')?.invalid}">
+            <label class="col-form-label" style="font-weight: bold" for="cost">Cost: </label>
+            <input class="form-control" style="border-radius: 0px;" id="cost" type="number" formControlName="cost">
+            <div class="validation" *ngIf="addForm.get('cost')?.touched && addForm.get('cost')?.invalid">
+              <small *ngIf="addForm.get('cost')?.errors?.required">Enter field.</small>
+            </div>
+          </div>
+          <div class="form-group" [ngClass]="{invalid: addForm.get('description')?.touched && addForm.get('description')?.invalid}">
+            <label class="col-form-label" style="font-weight: bold" for="description">Description: </label>
+            <textarea class="form-control" style="border-radius: 0px;" id="description" formControlName="description"></textarea>
+          </div>
+          <div class="form-group" [ngClass]="{invalid: addForm.get('categoryid')?.touched && addForm.get('categoryid')?.invalid}">
+            <label class="col-form-label" style="font-weight: bold" for="categoryid">Category: </label>
+            <select *ngIf="categories$ | async as categories1; else loading" class="form-control" style="border-radius: 0px;" formControlName="categoryid" id="categoryid">
+              <option *ngFor="let category1 of categories1" value="{{category1.Id}}">{{category1.Name}}</option>
+            </select>
+          </div>
+          <div class="form-group" [ngClass]="{invalid: addForm.get('providerid')?.touched && addForm.get('providerid')?.invalid}">
+            <label class="col-form-label" style="font-weight: bold" for="providerid">Provider: </label>
+            <select *ngIf="providers$ | async as providers1; else loading" class="form-control" style="border-radius: 0px;"  formControlName="providerid" id="providerid">
+              <option *ngFor="let provider1 of providers1" value="{{provider1.Id}}">{{provider1.Name}}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <button type="submit" (click)="addItem()" class="btn btn-outline-dark" style="border-radius: 0px;" [disabled]="addForm?.invalid || submitted" data-dismiss="modal">Add</button>
+            <button type="button" class="btn btn-outline-danger" style="border-radius: 0px;" data-dismiss="modal">Close</button>
+          </div>
+        </form>
+      </div>
+      <!--<div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>-->
+    </div>
+  </div>
+</div>
+
+<!--Modal Update Item-->
+<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">Update Provider</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="updateForm" (ngSubmit)="updateItem()">
+          <div class="form-group" [ngClass]="{invalid: updateForm.get('oldname')?.touched && updateForm.get('oldname')?.invalid}">
+            <label class="col-form-label" style="font-weight: bold" for="oldname">Name: </label>
+            <input class="form-control" style="border-radius: 0px;" id="oldname" type="text" formControlName="oldname">
+            <input class="form-control" style="border-radius: 0px;" id="updateid" type="number" hidden formControlName="updateid">
+            <div class="validation" *ngIf="updateForm.get('oldname')?.touched && updateForm.get('oldname')?.invalid">
+              <small *ngIf="updateForm.get('oldname')?.errors?.required">Enter field.</small>
+            </div>
+          </div>
+          <div class="form-group" [ngClass]="{invalid: updateForm.get('oldcost')?.touched && updateForm.get('oldcost')?.invalid}">
+            <label class="col-form-label" style="font-weight: bold" for="oldcost">Cost: </label>
+            <input class="form-control" style="border-radius: 0px;" id="oldcost" type="number" formControlName="oldcost">
+            <div class="validation" *ngIf="updateForm.get('oldcost')?.touched && updateForm.get('oldcost')?.invalid">
+              <small *ngIf="updateForm.get('oldcost')?.errors?.required">Enter field.</small>
+            </div>
+          </div>
+          <div class="form-group" [ngClass]="{invalid: updateForm.get('olddescription')?.touched && updateForm.get('olddescription')?.invalid}">
+            <label class="col-form-label" style="font-weight: bold" for="olddescription">Description: </label>
+            <textarea class="form-control" style="border-radius: 0px;" id="olddescription" formControlName="olddescription"></textarea>
+          </div>
+          <div class="form-group" [ngClass]="{invalid: updateForm.get('oldcategoryid')?.touched && updateForm.get('oldcategoryid')?.invalid}">
+            <label class="col-form-label" style="font-weight: bold" for="oldcategoryid">Category: </label>
+            <select *ngIf="categories$ | async as categories2; else loading" class="form-control" style="border-radius: 0px;" formControlName="oldcategoryid" id="oldcategoryid">
+              <option *ngFor="let category2 of categories2" value="{{category2.Id}}">{{category2.Name}}</option>
+            </select>
+          </div>
+          <div class="form-group" [ngClass]="{invalid: updateForm.get('oldproviderid')?.touched && updateForm.get('oldproviderid')?.invalid}">
+            <label class="col-form-label" style="font-weight: bold" for="oldproviderid">Provider: </label>
+            <select *ngIf="providers$ | async as providers2; else loading" class="form-control" style="border-radius: 0px;"  formControlName="oldproviderid" id="oldproviderid">
+              <option *ngFor="let provider2 of providers2" value="{{provider2.Id}}">{{provider2.Name}}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <button type="submit" (click)="updateItem()" class="btn btn-outline-dark" style="border-radius: 0px;" [disabled]="updateForm?.invalid || submitted" data-dismiss="modal">Update</button>
+            <button type="button" class="btn btn-outline-danger" style="border-radius: 0px;" data-dismiss="modal">Close</button>
+          </div>
+        </form>
+      </div>
+      <!--<div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>-->
+    </div>
+  </div>
+</div>
+
+<!--Modal Delete Item-->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">Delete Provider</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="deleteForm" (ngSubmit)="deleteItem()">
+          <div class="form-group">
+            <label class="col-form-label" style="font-weight: bold">Are You shure? </label>
+            <input class="form-control" style="border-radius: 0px;" id="deleteid" type="number" hidden formControlName="deleteid">
+          </div>
+          <div class="form-group">
+            <button type="submit" (click)="deleteItem()" class="btn btn-outline-dark" style="border-radius: 0px;" [disabled]="deleteForm?.invalid || submitted" data-dismiss="modal">Delete</button>
+            <button type="button" class="btn btn-outline-danger" style="border-radius: 0px;" data-dismiss="modal">Close</button>
+          </div>
+        </form>
+      </div>
+      <!--<div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>-->
+    </div>
   </div>
 </div>
 

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { Category } from 'src/app/interfaces/categories.interfaces';
 import { Pagination } from 'src/app/interfaces/pagination.interfaces';
@@ -19,6 +20,13 @@ export class ProductsComponent implements OnInit {
   public providers$: Observable<Provider[]> | undefined;
   public products: Product[] = [];
 
+  public addForm: FormGroup = new FormGroup({});
+  public updateForm: FormGroup = new FormGroup({});
+  public deleteForm: FormGroup = new FormGroup({});
+
+  public submitted = false;
+  public message: string = '';
+  
   public metaData: Pagination = {
     TotalPages: 0,
     TotalCount: 0,
@@ -53,6 +61,24 @@ export class ProductsComponent implements OnInit {
     this.sendQuery();
     this.providers$ = this.providersService.GetProviders();
     this.categories$ = this.categoriesServie.GetCategories();
+    this.addForm = new FormGroup({
+      name: new FormControl('', [Validators.required, Validators.minLength(4)]),
+      cost: new FormControl('', [Validators.required]),
+      description: new FormControl(),
+      categoryid: new FormControl('', [Validators.required]),
+      providerid: new FormControl('', [Validators.required]),
+    });
+    this.updateForm = new FormGroup({
+      oldname: new FormControl('', [Validators.required, Validators.minLength(4)]),
+      oldcost: new FormControl('', [Validators.required]),
+      olddescription: new FormControl(),
+      oldcategoryid: new FormControl('', [Validators.required]),
+      oldproviderid: new FormControl('', [Validators.required]),
+      updateid: new FormControl()
+    });
+    this.deleteForm = new FormGroup({
+      deleteid: new FormControl()
+    });
   }
 
   public search(): void {
@@ -78,6 +104,62 @@ export class ProductsComponent implements OnInit {
   public setProvider(): void {
     this.params.ProviderId = Number((<HTMLInputElement>document.getElementById('provider')).value);
     this.sendQuery();
+  }
+
+  public putDataToUpdate(product: Product): void {
+    this.updateForm.controls['oldname'].setValue(product.Name);
+    this.updateForm.controls['oldcost'].setValue(product.Cost);
+    this.updateForm.controls['olddescription'].setValue(product.Description);
+    //this.updateForm.controls['oldcategoryid'].setValue(product.Category);
+    //this.updateForm.controls['oldproviderid'].setValue(product.Provider);
+    this.updateForm.controls['updateid'].setValue(product.Id);
+  }
+
+  public putDataToDelete(product: Product): void {
+    this.deleteForm.controls['deleteid'].setValue(product.Id);
+  }
+
+  public updateItem(): void {
+    if (this.updateForm.invalid) return;
+    
+    this.submitted = true;
+
+    /*
+    const product: Product = {
+      Name: this.updateForm.value.oldname,
+      Id: this.updateForm.value.updateid,
+      Description: this.updateForm.value.olddescription,
+      Cost: this.updateForm.value.oldcost,
+      // cat id
+      // prov id
+    };
+    this.productsService.UpdateProduct(product).subscribe();
+    */
+  }
+
+  public deleteItem(): void {
+    if (this.deleteForm.invalid) return;
+    
+    this.submitted = true;
+    this.productsService.DeleteProduct( this.deleteForm.value.deleteid).subscribe();
+  }
+
+  public addItem(): void {
+    if (this.addForm.invalid) return;
+    
+    this.submitted = true;
+
+    /*
+    const product: Product = {
+      Name: this.updateForm.value.oldname,
+      Id: this.updateForm.value.updateid,
+      Description: this.updateForm.value.olddescription,
+      Cost: this.updateForm.value.oldcost,
+      // cat id
+      // prov id
+    };
+    this.productsService.AddProduct(product).subscribe();
+    */
   }
 
   public leftPage(): void {
