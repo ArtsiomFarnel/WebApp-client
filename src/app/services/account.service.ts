@@ -21,6 +21,12 @@ export class AccountService {
     return localStorage.getItem('fb-token');
   }
 
+  public getUserData(): Observable<any> {
+    return this.http.get(`${this.pathBase}account/get_user_data`).pipe(
+      catchError(this.handleError.bind(this))
+    );
+  }
+
   public login(user: UserLogin): Observable<any> {
     return this.http.post(`${this.pathBase}account/authenticate`, user).pipe(
       tap((result: any) => this.setToken(result)),
