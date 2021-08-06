@@ -35,7 +35,7 @@ export class CatalogComponent implements OnInit {
     CategoryId: 0,
     ProviderId: 0,
     PageNumber: 1,
-    PageSize: 8
+    PageSize: 4
   }
 
   constructor(
