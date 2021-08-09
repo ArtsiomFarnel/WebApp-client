@@ -1,1 +1,12 @@
-<p>profile works!</p>
+<div *ngIf="userData | async as data; else loading">
+  <span>FirstName: {{data.firstName}}</span><br>
+  <span>LastName: {{data.lastName}}</span><br>
+  <span>UserName: {{data.userName}}</span><br>
+  <span>Email: {{data.email}}</span><br>
+  <span>PhoneNumber: {{data.phoneNumber}}</span>
+</div>
+<button class="btn btn-outline-dark" style="border-radius: 0px;">Edit</button>
+<ng-template #loading>
+  <span>Loading...</span>
+</ng-template>
+  

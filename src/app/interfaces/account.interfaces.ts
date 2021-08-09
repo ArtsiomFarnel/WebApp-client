@@ -13,3 +13,16 @@ export interface UserSignup {
   PhoneNumber: string;
   Roles: string[]
 }
+
+export interface UserData {
+  firstName: string,
+  lastName: string,
+  userName: string,
+  email: string,
+  phoneNumber: string,
+  //Id: string,
+  //EmailConfirmed: boolean,
+  //PasswordHash: string,
+  //PhoneNumberConfirmed: boolean,
+  //TwoFactorEnabled: boolean
+}
