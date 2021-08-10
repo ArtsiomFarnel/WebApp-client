@@ -21,6 +21,7 @@ export class CatalogComponent implements OnInit {
   public products: Product[] = [];
   public isLoading: boolean = false;
 
+  /*
   public metaData: Pagination = {
     TotalPages: 0,
     TotalCount: 0,
@@ -29,6 +30,7 @@ export class CatalogComponent implements OnInit {
     HasPrevious: false,
     CurrentPage: 0
   };
+  */
 
   public params = {
     SearchTerm: '',
@@ -37,7 +39,7 @@ export class CatalogComponent implements OnInit {
     CategoryId: 0,
     ProviderId: 0,
     PageNumber: 1,
-    PageSize: 8
+    PageSize: 4
   }
 
   constructor(
@@ -47,18 +49,18 @@ export class CatalogComponent implements OnInit {
     private paginationService: PaginationService) { }
 
   public sendQuery(): void {
-
     this.params.PageNumber = this.paginationService.metaData.CurrentPage;
     this.isLoading = true;
     this.productsService.GetAllProducts(this.params).subscribe(data => {
       this.products = data.body;
-      this.metaData = JSON.parse(data.headers.get('pagination'));
+      //this.metaData = JSON.parse(data.headers.get('pagination'));
       this.paginationService.metaData = JSON.parse(data.headers.get('pagination'));
       this.isLoading = false;
     });
   }
 
   ngOnInit(): void {
+    this.paginationService.metaData.CurrentPage = 1;
     this.sendQuery();
     this.providers$ = this.providersService.GetProviders();
     this.categories$ = this.categoriesServie.GetCategories();
@@ -88,7 +90,7 @@ export class CatalogComponent implements OnInit {
     this.params.ProviderId = Number((<HTMLInputElement>document.getElementById('provider')).value);
     this.sendQuery();
   }
-
+  /*
   public leftPage(): void {
     if (this.params.PageNumber == 1) return;
     this.params.PageNumber--;
@@ -100,4 +102,5 @@ export class CatalogComponent implements OnInit {
     if (this.params.PageNumber <= this.metaData.TotalPages) this.sendQuery();
     else this.leftPage();
   }
+  */
 }

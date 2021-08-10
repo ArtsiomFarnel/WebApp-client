@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ProvidersService } from 'src/app/services/providers.service';
 import { Pagination } from 'src/app/interfaces/pagination.interfaces';
 import { Provider } from 'src/app/interfaces/providers.interfaces';
+import { PaginationService } from 'src/app/services/pagination.service';
 
 @Component({
   selector: 'app-providers',
@@ -13,6 +14,7 @@ import { Provider } from 'src/app/interfaces/providers.interfaces';
 export class ProvidersComponent implements OnInit {
 
   public providers: Provider[] = [];
+  /*
   public metaData: Pagination = {
     TotalPages: 0,
     TotalCount: 0,
@@ -21,7 +23,7 @@ export class ProvidersComponent implements OnInit {
     HasPrevious: false,
     CurrentPage: 0
   };
-
+  */
   public addForm: FormGroup = new FormGroup({});
   public updateForm: FormGroup = new FormGroup({});
   public deleteForm: FormGroup = new FormGroup({});
@@ -31,14 +33,17 @@ export class ProvidersComponent implements OnInit {
 
   public params = {
     SearchTerm: '',
-    PageNumber: 1
+    PageNumber: 1,
+    PageSize: 4
   }
 
   constructor(
     private router: Router,
-    private providersService: ProvidersService) { }
+    private providersService: ProvidersService,
+    private paginationService: PaginationService) { }
 
   ngOnInit(): void {
+    this.paginationService.metaData.CurrentPage = 1;
     this.sendQuery();
     this.addForm = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.minLength(4)])
@@ -52,10 +57,11 @@ export class ProvidersComponent implements OnInit {
     });
   }
 
-  private sendQuery(): void {
+  public sendQuery(): void {
+    this.params.PageNumber = this.paginationService.metaData.CurrentPage;
     this.providersService.GetAllProviders(this.params).subscribe(data => {
       this.providers = data.body;
-      this.metaData = JSON.parse(data.headers.get('pagination'));
+      this.paginationService.metaData = JSON.parse(data.headers.get('pagination'));
     });
   }
 
@@ -103,7 +109,7 @@ export class ProvidersComponent implements OnInit {
 
     this.providersService.AddProvider(provider).subscribe();
   }
-
+  /*
   public leftPage(): void {
     if (this.params.PageNumber == 1) return;
     this.params.PageNumber--;
@@ -115,4 +121,5 @@ export class ProvidersComponent implements OnInit {
     if (this.params.PageNumber <= this.metaData.TotalPages) this.sendQuery();
     else this.leftPage();
   }
+  */
 }

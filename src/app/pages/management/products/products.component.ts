@@ -6,6 +6,7 @@ import { Pagination } from 'src/app/interfaces/pagination.interfaces';
 import { Product, ProductDTO } from 'src/app/interfaces/products.interfaces';
 import { Provider } from 'src/app/interfaces/providers.interfaces';
 import { CategoriesService } from 'src/app/services/categories.service';
+import { PaginationService } from 'src/app/services/pagination.service';
 import { ProductsService } from 'src/app/services/products.service';
 import { ProvidersService } from 'src/app/services/providers.service';
 
@@ -27,6 +28,7 @@ export class ProductsComponent implements OnInit {
   public submitted = false;
   public message: string = '';
   
+  /*
   public metaData: Pagination = {
     TotalPages: 0,
     TotalCount: 0,
@@ -35,6 +37,7 @@ export class ProductsComponent implements OnInit {
     HasPrevious: false,
     CurrentPage: 0
   };
+  */
 
   public params = {
     SearchTerm: '',
@@ -42,22 +45,26 @@ export class ProductsComponent implements OnInit {
     OrderBy: '',
     CategoryId: 0,
     ProviderId: 0,
-    PageNumber: 1
+    PageNumber: 1,
+    PageSize: 4
   }
 
   constructor(
     private productsService: ProductsService,
     private providersService: ProvidersService,
-    private categoriesServie: CategoriesService) { }
+    private categoriesServie: CategoriesService,
+    private paginationService: PaginationService) { }
 
-  private sendQuery(): void {
+  public sendQuery(): void {
+    this.params.PageNumber = this.paginationService.metaData.CurrentPage;
     this.productsService.GetAllProducts(this.params).subscribe(data => {
       this.products = data.body;
-      this.metaData = JSON.parse(data.headers.get('pagination'));
+      this.paginationService.metaData = JSON.parse(data.headers.get('pagination'));
     });
   }
-  provider: Provider[] = [];
+  
   ngOnInit(): void {
+    this.paginationService.metaData.CurrentPage = 1;
     this.sendQuery();
     this.providers$ = this.providersService.GetProviders();
     this.categories$ = this.categoriesServie.GetCategories();
@@ -161,6 +168,7 @@ export class ProductsComponent implements OnInit {
 
   }
 
+  /*
   public leftPage(): void {
     if (this.params.PageNumber == 1) return;
     this.params.PageNumber--;
@@ -172,4 +180,5 @@ export class ProductsComponent implements OnInit {
     if (this.params.PageNumber <= this.metaData.TotalPages) this.sendQuery();
     else this.leftPage();
   }
+  */
 }

@@ -8,7 +8,7 @@ import { PaginationService } from 'src/app/services/pagination.service';
 })
 export class PaginationComponent implements OnInit {
 
-  constructor(public pagination : PaginationService) { }
+  constructor(public paginationService: PaginationService) { }
 
   ngOnInit(): void {
   }

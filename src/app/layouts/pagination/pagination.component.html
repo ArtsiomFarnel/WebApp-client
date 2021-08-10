@@ -1,29 +1,7 @@
-<nav  aria-label="Page navigation example" >
-    <ul class="pagination">
-        <li class="page-item">
-            <p class="page-link" (click)="this.pagination.changePage(-1);" >
-                &laquo;
-            </p>
-        </li>
-        <li *ngIf="this.pagination.metaData.CurrentPage > 1" class="page-item" (click)="this.pagination.changePage(-1);">
-            <p class="page-link" >
-                {{this.pagination.metaData.CurrentPage-1}}
-            </p>
-        </li> 
-        <li class="page-item">
-            <p class="page-link" style="background-color: rgb(205, 218, 226);" >
-                {{this.pagination.metaData.CurrentPage}}
-            </p>
-        </li>
-        <li *ngIf="this.pagination.metaData.CurrentPage < this.pagination.metaData.TotalCount" class="page-item" (click)="this.pagination.changePage(+1);">
-            <p class="page-link" >
-                {{this.pagination.metaData.CurrentPage+1}}
-            </p>
-        </li>
-        <li class="page-item">
-            <p class="page-link" (click)="this.pagination.changePage(+1);" >
-                &raquo;
-            </p>
-        </li>
-    </ul>
-</nav>
+<div class="pagination ">
+  <button class="btn btn-outline-dark" style="border-radius: 0px;" (click)="this.paginationService.changePage(-1);">&laquo;</button>
+  <button class="btn btn-outline-dark" style="border-radius: 0px;" *ngIf="this.paginationService.metaData.CurrentPage > 1" (click)="this.paginationService.changePage(-1);">{{this.paginationService.metaData.CurrentPage-1}}</button>
+  <button class="btn btn-outline-dark" style="border-radius: 0px; background-color: gray;">{{this.paginationService.metaData.CurrentPage}}</button>
+  <button class="btn btn-outline-dark" style="border-radius: 0px;" *ngIf="this.paginationService.metaData.CurrentPage < this.paginationService.metaData.TotalPages" (click)="this.paginationService.changePage(+1);">{{this.paginationService.metaData.CurrentPage+1}}</button>
+  <button class="btn btn-outline-dark" style="border-radius: 0px;" (click)="this.paginationService.changePage(+1);">&raquo;</button>
+</div>

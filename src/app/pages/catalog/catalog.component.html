@@ -57,17 +57,17 @@
     <div class="form-group row">
       <label class="col-sm-4 col-form-label" style="font-weight: bold">Pagination</label>
       <div class="col-sm-8">
-        <div class="pagination ">
+        <app-pagination (click)="this.sendQuery()"></app-pagination>
+        <!--<div class="pagination ">
           <button class="btn btn-outline-dark" style="border-radius: 0px;" (click)="leftPage()">&laquo;</button>
           <button class="btn btn-outline-dark" style="border-radius: 0px;">{{this.params.PageNumber}}</button>
           <button class="btn btn-outline-dark" style="border-radius: 0px;">{{this.params.PageNumber}}</button>
           <button class="btn btn-outline-dark" style="border-radius: 0px;">{{this.params.PageNumber}}</button>
           <button class="btn btn-outline-dark" style="border-radius: 0px;" (click)="rightPage()">&raquo;</button>
-        </div>
+        </div>-->
       </div> 
     </div>
   </div>
-  <app-pagination (click)="this.sendQuery()"></app-pagination>
 </div>
 
 <div style="margin-left: 320px; margin-bottom: 60px;" *ngIf="isLoading">
