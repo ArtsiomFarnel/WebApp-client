@@ -52,17 +52,29 @@
         </select>
       </div>
     </div>
+    <hr style="background-color: dimgray; height: 1px;" />
+
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" style="font-weight: bold">Pagination</label>
+      <div class="col-sm-8">
+        <div class="pagination ">
+          <button class="btn btn-outline-dark" style="border-radius: 0px;" (click)="leftPage()">&laquo;</button>
+          <button class="btn btn-outline-dark" style="border-radius: 0px;">{{this.params.PageNumber}}</button>
+          <button class="btn btn-outline-dark" style="border-radius: 0px;">{{this.params.PageNumber}}</button>
+          <button class="btn btn-outline-dark" style="border-radius: 0px;">{{this.params.PageNumber}}</button>
+          <button class="btn btn-outline-dark" style="border-radius: 0px;" (click)="rightPage()">&raquo;</button>
+        </div>
+      </div> 
+    </div>
   </div>
-  <!--<app-pagination></app-pagination>-->
-  <div class="pagination">
-    <a (click)="leftPage()">&laquo;</a>
-    <a>{{this.params.PageNumber}}</a>
-    <a (click)="rightPage()">&raquo;</a>
-  </div> 
+  <app-pagination (click)="this.sendQuery()"></app-pagination>
 </div>
 
-<div style="margin-left: 320px; margin-bottom: 60px;" > 
-  <div *ngIf="products?.length==0">No records found.</div>
+<div style="margin-left: 320px; margin-bottom: 60px;" *ngIf="isLoading">
+  <span>Loading...</span>
+</div>
+<div style="margin-left: 320px; margin-bottom: 60px;" *ngIf="!isLoading"> 
+  <!--<div *ngIf="products?.length==0">No records found.</div>-->
     <ul class="products clearfix">
       <li class="product-wrapper" *ngFor="let product of products">
         <div class="product">
@@ -72,7 +84,7 @@
           <div>
             <h4 style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">{{product.Name}}</h4>
             <p style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
-              <b>Cost: </b><span>{{product.Cost}}</span><br>
+              <b>Cost: </b><span>{{product.Cost.toFixed(2)}}</span><br>
               <b>Category: </b><span>{{product.Category}}</span><br>
               <b>Provider: </b><span>{{product.Provider}}</span><br>
             </p>

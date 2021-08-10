@@ -1,1 +1,29 @@
-<p>pagination works!</p>
+<nav  aria-label="Page navigation example" >
+    <ul class="pagination">
+        <li class="page-item">
+            <p class="page-link" (click)="this.pagination.changePage(-1);" >
+                &laquo;
+            </p>
+        </li>
+        <li *ngIf="this.pagination.metaData.CurrentPage > 1" class="page-item" (click)="this.pagination.changePage(-1);">
+            <p class="page-link" >
+                {{this.pagination.metaData.CurrentPage-1}}
+            </p>
+        </li> 
+        <li class="page-item">
+            <p class="page-link" style="background-color: rgb(205, 218, 226);" >
+                {{this.pagination.metaData.CurrentPage}}
+            </p>
+        </li>
+        <li *ngIf="this.pagination.metaData.CurrentPage < this.pagination.metaData.TotalCount" class="page-item" (click)="this.pagination.changePage(+1);">
+            <p class="page-link" >
+                {{this.pagination.metaData.CurrentPage+1}}
+            </p>
+        </li>
+        <li class="page-item">
+            <p class="page-link" (click)="this.pagination.changePage(+1);" >
+                &raquo;
+            </p>
+        </li>
+    </ul>
+</nav>

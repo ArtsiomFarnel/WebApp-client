@@ -5,6 +5,7 @@ import { Pagination } from 'src/app/interfaces/pagination.interfaces';
 import { Product } from 'src/app/interfaces/products.interfaces';
 import { Provider } from 'src/app/interfaces/providers.interfaces';
 import { CategoriesService } from 'src/app/services/categories.service';
+import { PaginationService } from 'src/app/services/pagination.service';
 import { ProductsService } from 'src/app/services/products.service';
 import { ProvidersService } from 'src/app/services/providers.service';
 
@@ -18,6 +19,7 @@ export class CatalogComponent implements OnInit {
   public categories$: Observable<Category[]> | undefined;
   public providers$: Observable<Provider[]> | undefined;
   public products: Product[] = [];
+  public isLoading: boolean = false;
 
   public metaData: Pagination = {
     TotalPages: 0,
@@ -35,20 +37,26 @@ export class CatalogComponent implements OnInit {
     CategoryId: 0,
     ProviderId: 0,
     PageNumber: 1,
-    PageSize: 4
+    PageSize: 8
   }
 
   constructor(
     private productsService: ProductsService,
     private providersService: ProvidersService,
-    private categoriesServie: CategoriesService) { }
+    private categoriesServie: CategoriesService,
+    private paginationService: PaginationService) { }
 
-  private sendQuery(): void {
+  public sendQuery(): void {
+
+    this.params.PageNumber = this.paginationService.metaData.CurrentPage;
+    this.isLoading = true;
     this.productsService.GetAllProducts(this.params).subscribe(data => {
       this.products = data.body;
       this.metaData = JSON.parse(data.headers.get('pagination'));
+      this.paginationService.metaData = JSON.parse(data.headers.get('pagination'));
+      this.isLoading = false;
     });
-  }      
+  }
 
   ngOnInit(): void {
     this.sendQuery();

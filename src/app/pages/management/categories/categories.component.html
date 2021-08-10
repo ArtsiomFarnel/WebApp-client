@@ -16,13 +16,20 @@
         <label class="col-form-label" style="font-weight: bold">Search</label>
         <input class="form-control" style="border-radius: 0px;" type="search" id="search" (input)="search()" />
       </div>
-    </div>
-
-    <div>
-      <div class="pagination">
-        <a (click)="leftPage()">&laquo;</a>
-        <a>{{this.params.PageNumber}}</a>
-        <a (click)="rightPage()">&raquo;</a>
+      <hr style="background-color: dimgray; height: 1px;" />
+      
+      <div class="form-group row">
+        <!--<app-pagination></app-pagination>-->
+        <label class="col-sm-4 col-form-label" style="font-weight: bold">Pagination</label>
+        <div class="col-sm-8">
+          <div class="pagination ">
+            <button class="btn btn-outline-dark" style="border-radius: 0px;" (click)="leftPage()">&laquo;</button>
+            <button class="btn btn-outline-dark" style="border-radius: 0px;">{{this.params.PageNumber}}</button>
+            <button class="btn btn-outline-dark" style="border-radius: 0px;">{{this.params.PageNumber}}</button>
+            <button class="btn btn-outline-dark" style="border-radius: 0px;">{{this.params.PageNumber}}</button>
+            <button class="btn btn-outline-dark" style="border-radius: 0px;" (click)="rightPage()">&raquo;</button>
+          </div>
+        </div> 
       </div>
     </div>
   </div>
