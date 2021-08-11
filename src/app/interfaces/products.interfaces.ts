@@ -3,6 +3,7 @@ export interface Product {
   Name: string;
   Description: string;
   Cost: number;
+  ImagePath: string;
   Category: string;
   Provider: string;
 }
@@ -12,6 +13,7 @@ export interface ProductDTO {
   Name: string;
   Description: string;
   Cost: number;
+  ImagePath: string;
   CategoryId: number;
   ProviderId: number;
 }

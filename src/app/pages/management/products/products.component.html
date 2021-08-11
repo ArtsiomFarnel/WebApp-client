@@ -133,6 +133,10 @@
               <small *ngIf="addForm.get('cost')?.errors?.required">Enter field.</small>
             </div>
           </div>
+          <div class="form-group" [ngClass]="{invalid: addForm.get('imagepath')?.touched && addForm.get('imagepath')?.invalid}">
+            <label class="col-form-label" style="font-weight: bold" for="imagepath">Image Path: </label>
+            <input class="form-control" style="border-radius: 0px;" id="imagepath" type="text" formControlName="imagepath">
+          </div>
           <div class="form-group" [ngClass]="{invalid: addForm.get('description')?.touched && addForm.get('description')?.invalid}">
             <label class="col-form-label" style="font-weight: bold" for="description">Description: </label>
             <textarea class="form-control" style="border-radius: 0px;" id="description" formControlName="description"></textarea>
@@ -189,6 +193,10 @@
             <div class="validation" *ngIf="updateForm.get('oldcost')?.touched && updateForm.get('oldcost')?.invalid">
               <small *ngIf="updateForm.get('oldcost')?.errors?.required">Enter field.</small>
             </div>
+          </div>
+          <div class="form-group" [ngClass]="{invalid: addForm.get('oldimagepath')?.touched && addForm.get('oldimagepath')?.invalid}">
+            <label class="col-form-label" style="font-weight: bold" for="oldimagepath">Image Path: </label>
+            <input class="form-control" style="border-radius: 0px;" id="oldimagepath" type="text" formControlName="oldimagepath">
           </div>
           <div class="form-group" [ngClass]="{invalid: updateForm.get('olddescription')?.touched && updateForm.get('olddescription')?.invalid}">
             <label class="col-form-label" style="font-weight: bold" for="olddescription">Description: </label>

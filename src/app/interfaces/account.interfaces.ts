@@ -20,6 +20,7 @@ export interface UserData {
   userName: string,
   email: string,
   phoneNumber: string,
+  imagePath: string,
   //Id: string,
   //EmailConfirmed: boolean,
   //PasswordHash: string,

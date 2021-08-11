@@ -79,7 +79,7 @@
       <li class="product-wrapper" *ngFor="let product of products">
         <div class="product">
           <div class="product-photo">
-            <img src="assets/img/products/default.png" width="128" alt="Preview Image" />
+            <img src="{{product.ImagePath}}" width="128" alt="Preview Image" />
           </div>
           <div>
             <h4 style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">{{product.Name}}</h4>

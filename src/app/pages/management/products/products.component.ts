@@ -72,6 +72,7 @@ export class ProductsComponent implements OnInit {
       name: new FormControl('', [Validators.required, Validators.minLength(4)]),
       cost: new FormControl('', [Validators.required]),
       description: new FormControl(),
+      imagepath: new FormControl(),
       categoryid: new FormControl('', [Validators.required]),
       providerid: new FormControl('', [Validators.required]),
     });
@@ -79,6 +80,7 @@ export class ProductsComponent implements OnInit {
       oldname: new FormControl('', [Validators.required, Validators.minLength(4)]),
       oldcost: new FormControl('', [Validators.required]),
       olddescription: new FormControl(),
+      oldimagepath: new FormControl(),
       oldcategoryid: new FormControl('', [Validators.required]),
       oldproviderid: new FormControl('', [Validators.required]),
       updateid: new FormControl()
@@ -136,6 +138,7 @@ export class ProductsComponent implements OnInit {
       Name: this.updateForm.value.oldname,
       Id: this.updateForm.value.updateid,
       Cost: this.updateForm.value.oldcost,
+      ImagePath: this.updateForm.value.oldimagepath,
       Description: this.updateForm.value.olddescription,
       CategoryId: this.updateForm.value.oldcategoryid,
       ProviderId: this.updateForm.value.oldproviderid
@@ -160,6 +163,7 @@ export class ProductsComponent implements OnInit {
       Name: this.addForm.value.name,
       Id: this.addForm.value.updateid,
       Description: this.addForm.value.description,
+      ImagePath: this.updateForm.value.imagepath,
       Cost: this.addForm.value.cost,
       CategoryId: this.addForm.value.categoryid,
       ProviderId: this.addForm.value.providerid
