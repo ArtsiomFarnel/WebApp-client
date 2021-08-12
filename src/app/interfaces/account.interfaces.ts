@@ -15,12 +15,12 @@ export interface UserSignup {
 }
 
 export interface UserData {
-  FirstName: string,
-  LastName: string,
-  UserName: string,
-  Email: string,
-  PhoneNumber: string,
-  ImagePath: string,
+  firstName: string,
+  lastName: string,
+  userName: string,
+  email: string,
+  phoneNumber: string,
+  imagePath: string,
   //Id: string,
   //PasswordHash: string,
   //EmailConfirmed: boolean,

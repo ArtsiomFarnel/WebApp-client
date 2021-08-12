@@ -8,7 +8,8 @@ import { UserData, UserLogin, UserSignup } from '../interfaces/account.interface
 export class AccountService {
 
   public error$: Subject<string> = new Subject<string>();
-  private pathBase: string = "https://localhost:5001/";
+  //private pathBase: string = "https://localhost:5001/";
+  public pathBase: string = "https://leeqviz-web-api.azurewebsites.net/account/";
 
   constructor(private http: HttpClient) { }
 
@@ -22,18 +23,18 @@ export class AccountService {
   }
 
   public getUserData(): Observable<UserData> {
-    return this.http.get<UserData>(`${this.pathBase}account/get_user_data`);
+    return this.http.get<UserData>(`${this.pathBase}get_user_data`);
   }
 
   public login(user: UserLogin): Observable<any> {
-    return this.http.post(`${this.pathBase}account/authenticate`, user).pipe(
+    return this.http.post(`${this.pathBase}authenticate`, user).pipe(
       tap((result: any) => this.setToken(result)),
       catchError(this.handleError.bind(this))
     );
   }
 
   public signup(user: UserSignup): Observable<any> {
-    return this.http.post(`${this.pathBase}account/register`, user).pipe(
+    return this.http.post(`${this.pathBase}register`, user).pipe(
       tap((result: any) => this.setToken(result)),
       catchError(this.handleError.bind(this))
     );

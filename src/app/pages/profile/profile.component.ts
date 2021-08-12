@@ -15,7 +15,7 @@ export class ProfileComponent implements OnInit {
   constructor(private accountService: AccountService) { }
 
   ngOnInit(): void {
-    this.userData = this.accountService.getUserData()
+    this.userData = this.accountService.getUserData();
   }
 
 }
