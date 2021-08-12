@@ -8,7 +8,7 @@ import { UserData, UserLogin, UserSignup } from '../interfaces/account.interface
 export class AccountService {
 
   public error$: Subject<string> = new Subject<string>();
-  private pathBase: string = "https://localhost:5001/";
+  private pathBase: string = "https://leeqviz-web-api.azurewebsites.net/";
 
   constructor(private http: HttpClient) { }
 

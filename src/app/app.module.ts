@@ -1,5 +1,6 @@
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -52,6 +53,7 @@ import { CatalogItemDetailComponent } from './pages/catalog/catalog-item-detail/
     ReactiveFormsModule,
     HttpClientModule,
     NgbModule,
+    FontAwesomeModule
   ],
   providers: [
     AccountGuard,

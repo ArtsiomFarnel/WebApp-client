@@ -6,7 +6,7 @@ import { Category } from "../interfaces/categories.interfaces";
 @Injectable({providedIn: 'root'})
 export class CategoriesService {
 
-  public pathBase: string = "https://localhost:5001/v2/categories/";
+  public pathBase: string = "https://leeqviz-web-api.azurewebsites.net/v2/categories/";
 
   constructor(private http: HttpClient) { }
 
