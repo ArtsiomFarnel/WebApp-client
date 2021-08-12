@@ -1,9 +1,25 @@
-<div *ngIf="product | async as prod; else loading">
-  <span>Name: {{prod.Name}}</span><br>
-  <span>Description: {{prod.Description}}</span><br>
-  <span>Provider: {{prod.Provider}}</span><br>
-  <span>Category: {{prod.Category}}</span>
-  <span><img src="{{prod.ImagePath}}" alt="Product Image" ></span>
+<div class="main-container" *ngIf="product | async as prod; else loading">
+  <table>
+    <tr>
+      <td style="vertical-align: top;">
+        <div>
+          <img class="img-thumbnail" style="border: 4px solid dimgray;" src="{{prod.ImagePath}}" width="256" alt="Preview Image" />
+        </div>
+      </td>
+      <td style="vertical-align: top;">
+        <div style="margin-left: 10px">
+          <h3>{{prod.Name}}</h3>
+          <p>
+            <b>Содержание:</b><br />
+            <b>Provider:</b><span> {{prod.Provider}}</span><br />
+            <b>Category:</b><span> {{prod.Category}}</span><br />
+            <b>Description:</b>
+          </p>
+          <pre style="word-wrap: break-word; font-family: Arial, Helvetica, sans-serif">{{prod.Description}}</pre>  
+        </div>
+      </td>
+    </tr>
+  </table>
 </div>
 
 <ng-template #loading>
