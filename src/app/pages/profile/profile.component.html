@@ -1,10 +1,10 @@
 <div *ngIf="userData | async as data; else loading">
-  <div><span>FirstName: {{data.firstName}}</span><br>
-    <span>LastName: {{data.lastName}}</span><br>
-    <span>UserName: {{data.userName}}</span><br>
-    <span>Email: {{data.email}}</span><br>
-    <span>PhoneNumber: {{data.phoneNumber}}</span>
-    <span><img src="{{data.imagePath}}" alt="Profile Image" ></span>
+  <div><span>FirstName: {{data.FirstName}}</span><br>
+    <span>LastName: {{data.LastName}}</span><br>
+    <span>UserName: {{data.UserName}}</span><br>
+    <span>Email: {{data.Email}}</span><br>
+    <span>PhoneNumber: {{data.PhoneNumber}}</span>
+    <span><img src="{{data.ImagePath}}" alt="Profile Image" ></span>
   </div>
   <button class="btn btn-outline-dark" style="border-radius: 0px;">Edit</button>
 </div>
