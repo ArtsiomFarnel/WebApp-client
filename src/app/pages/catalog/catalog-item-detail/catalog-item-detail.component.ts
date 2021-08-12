@@ -17,8 +17,7 @@ export class CatalogItemDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private productsService: ProductsService
-  ) { }
+    private productsService: ProductsService) { }
 
   private sendQuery(id: number): void {
     this.product = this.productsService.GetProductById(id);
@@ -28,7 +27,6 @@ export class CatalogItemDetailComponent implements OnInit {
   ngOnInit(): void {
     this.Id = this.route.snapshot.params['id'];
     this.sendQuery(this.Id);
-    console.log(this.product)
   }
 
 }
