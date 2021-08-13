@@ -24,6 +24,7 @@ import { FooterComponent } from './layouts/footer/footer.component';
 import { PaginationComponent } from './layouts/pagination/pagination.component';
 import { LoadingComponent } from './layouts/loading/loading.component';
 import { CatalogItemDetailComponent } from './pages/catalog/catalog-item-detail/catalog-item-detail.component';
+import { BasketComponent } from './pages/basket/basket.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { CatalogItemDetailComponent } from './pages/catalog/catalog-item-detail/
     FooterComponent,
     PaginationComponent,
     LoadingComponent,
-    CatalogItemDetailComponent
+    CatalogItemDetailComponent,
+    BasketComponent
   ],
   imports: [
     BrowserModule,

@@ -13,6 +13,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { AboutComponent } from './pages/about/about.component';
 import { PrivacyComponent } from './pages/privacy/privacy.component';
 import { CatalogItemDetailComponent } from './pages/catalog/catalog-item-detail/catalog-item-detail.component';
+import { BasketComponent } from './pages/basket/basket.component';
 
 const routes: Routes = [
   { path: "", component: HomeComponent },
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: "catalog", component: CatalogComponent },
   { path: "catalog/item-detail/:id", component: CatalogItemDetailComponent },
   { path: "profile", component: ProfileComponent, canActivate: [AccountGuard] },
+  { path: "basket", component: BasketComponent, canActivate: [AccountGuard] },
   { 
     path: "management", 
     component: ManagementComponent, 
