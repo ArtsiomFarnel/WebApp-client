@@ -5,8 +5,8 @@ import { Observable } from "rxjs";
 @Injectable({providedIn: 'root'})
 export class BasketService {
 
-  //public pathBase: string = "https://localhost:5001/v2/baskets/";
-  public pathBase: string = "https://leeqviz-web-api.azurewebsites.net/v2/baskets/";
+  private pathBase: string = "https://localhost:5001/v2/baskets/";
+  //public pathBase: string = "https://leeqviz-web-api.azurewebsites.net/v2/baskets/";
 
   constructor(private http: HttpClient) { }
 

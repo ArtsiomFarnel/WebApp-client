@@ -151,7 +151,7 @@ export class ProductsComponent implements OnInit {
     if (this.deleteForm.invalid) return;
     
     this.submitted = true;
-    this.productsService.DeleteProduct( this.deleteForm.value.deleteid).subscribe();
+    this.productsService.DeleteProduct(this.deleteForm.value.deleteid).subscribe();
   }
 
   public addItem(): void {

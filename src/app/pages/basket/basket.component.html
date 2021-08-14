@@ -1,5 +1,9 @@
 <div *ngFor="let item of basketItems">
   <p>
     <span>{{item.Id}}</span>
+    <span>{{item.Amount}}</span>
+    <span>{{item.ProductName}}</span>
+    <span>{{item.ProductCost}}</span>
+    <button (click)="this.deleteItemFromBasket(item.Id)" >Remove</button>
   </p>
 </div>

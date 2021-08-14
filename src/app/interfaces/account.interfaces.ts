@@ -27,3 +27,7 @@ export interface UserData {
   //PhoneNumberConfirmed: boolean,
   //TwoFactorEnabled: boolean
 }
+
+export interface UserRole {
+  Roles: string[]
+}

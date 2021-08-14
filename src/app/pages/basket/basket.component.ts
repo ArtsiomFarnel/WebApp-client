@@ -23,7 +23,7 @@ export class BasketComponent implements OnInit {
 
   constructor(private basketService: BasketService) { }
 
-  ngOnInit(): void {
+  public sendQuery(): void {
     this.basketService.GetAllBasketItems(this.params).subscribe(data => {
       this.basketItems = data.body;
       //this.metaData = JSON.parse(data.headers.get('pagination'));
@@ -31,4 +31,12 @@ export class BasketComponent implements OnInit {
     });
   }
 
+  ngOnInit(): void {
+    this.sendQuery();
+  }
+
+  public deleteItemFromBasket(id: number | undefined): void {
+    this.basketService.DeleteItemFromBasket(id).subscribe();
+    this.sendQuery();
+  }
 }

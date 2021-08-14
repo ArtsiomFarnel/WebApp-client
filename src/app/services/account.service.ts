@@ -2,14 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, Subject, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
-import { UserData, UserLogin, UserSignup } from '../interfaces/account.interfaces';
+import { UserData, UserLogin, UserRole, UserSignup } from '../interfaces/account.interfaces';
 
 @Injectable({providedIn: 'root'})
 export class AccountService {
 
   public error$: Subject<string> = new Subject<string>();
-  //private pathBase: string = "https://localhost:5001/";
-  public pathBase: string = "https://leeqviz-web-api.azurewebsites.net/account/";
+  private pathBase: string = "https://localhost:5001/account/";
+  //public pathBase: string = "https://leeqviz-web-api.azurewebsites.net/account/";
 
   constructor(private http: HttpClient) { }
 
@@ -24,6 +24,10 @@ export class AccountService {
 
   public getUserData(): Observable<UserData> {
     return this.http.get<UserData>(`${this.pathBase}get_user_data`);
+  }
+
+  public getUserRole(): Observable<UserRole> {
+    return this.http.get<UserRole>(`${this.pathBase}get_user_role`);
   }
 
   public login(user: UserLogin): Observable<any> {
@@ -46,6 +50,13 @@ export class AccountService {
 
   public isAuthenticated(): boolean {
     return !!this.token;
+  }
+
+  roles: UserRole | undefined;
+  public isClient(): boolean {
+    this.getUserRole().subscribe((data: UserRole) => this.roles = data);
+    if (this.roles?.Roles.indexOf('Client') != -1) return true;
+    else return false;
   }
 
   private handleError(error: HttpErrorResponse): Observable<never> {

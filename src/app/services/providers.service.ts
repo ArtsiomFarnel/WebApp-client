@@ -6,8 +6,8 @@ import { Provider } from "../interfaces/providers.interfaces";
 @Injectable({providedIn: 'root'})
 export class ProvidersService {
 
-  //public pathBase: string = "https://localhost:5001/v2/providers/";
-  public pathBase: string = "https://leeqviz-web-api.azurewebsites.net/v2/providers/";
+  private pathBase: string = "https://localhost:5001/v2/providers/";
+  //public pathBase: string = "https://leeqviz-web-api.azurewebsites.net/v2/providers/";
 
   constructor(private http: HttpClient) { }
 
