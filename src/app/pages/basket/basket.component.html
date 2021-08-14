@@ -1,9 +1,24 @@
 <div *ngFor="let item of basketItems">
-  <p>
-    <span>{{item.Id}}</span>
-    <span>{{item.Amount}}</span>
-    <span>{{item.ProductName}}</span>
-    <span>{{item.ProductCost}}</span>
-    <button (click)="this.deleteItemFromBasket(item.Id)" >Remove</button>
-  </p>
+  <table class="table table-bordered table-sm">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Cost</th>
+        <th>Amount</th>
+        <th>Operation</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{item.ProductName}}</td>
+        <td>{{item.ProductCost}}</td>
+        <td>{{item.Amount}}</td>
+        <td>
+          <div style="display: inline-block" class="btn-group-vertical btn-block">
+            <button class="btn btn-outline-dark" style="border-radius: 0px;" (click)="this.deleteItemFromBasket(item.Id)" >Remove</button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>

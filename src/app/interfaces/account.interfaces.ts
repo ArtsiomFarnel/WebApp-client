@@ -28,6 +28,3 @@ export interface UserData {
   //TwoFactorEnabled: boolean
 }
 
-export interface UserRole {
-  Roles: string[]
-}

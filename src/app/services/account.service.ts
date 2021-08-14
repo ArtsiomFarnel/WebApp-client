@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, Subject, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
-import { UserData, UserLogin, UserRole, UserSignup } from '../interfaces/account.interfaces';
+import { UserData, UserLogin, UserSignup } from '../interfaces/account.interfaces';
 
 @Injectable({providedIn: 'root'})
 export class AccountService {
@@ -24,10 +24,6 @@ export class AccountService {
 
   public getUserData(): Observable<UserData> {
     return this.http.get<UserData>(`${this.pathBase}get_user_data`);
-  }
-
-  public getUserRole(): Observable<UserRole> {
-    return this.http.get<UserRole>(`${this.pathBase}get_user_role`);
   }
 
   public login(user: UserLogin): Observable<any> {
@@ -52,10 +48,8 @@ export class AccountService {
     return !!this.token;
   }
 
-  roles: UserRole | undefined;
   public isClient(): boolean {
-    this.getUserRole().subscribe((data: UserRole) => this.roles = data);
-    if (this.roles?.Roles.indexOf('Client') != -1) return true;
+    if (localStorage.getItem('fb-roles') == 'Client') return true;
     else return false;
   }
 
@@ -79,6 +73,7 @@ export class AccountService {
     if (response) {
       const expiresDate = new Date(new Date().getTime() + 60 * 60 * 1000);
       localStorage.setItem('fb-token', response.token);
+      localStorage.setItem('fb-roles', response.roles);
       localStorage.setItem('fb-token-exp', expiresDate.toString());
     } 
     else localStorage.clear(); 

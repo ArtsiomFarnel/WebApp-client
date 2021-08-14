@@ -22,12 +22,12 @@
         </div>
         <div style="text-align: right">
           <ul class="navbar-nav flex-grow-1" *ngIf="accountService.isAuthenticated(); else login">
-            <li class="nav-item">
+            <li class="nav-item" *ngIf="accountService.isClient();">
               <a class="nav-link" [routerLink]="['basket']">
                 <input type="button" value="Basket" class="btn btn-outline-dark" style="border-radius: 0px;" />
               </a>
             </li>
-            <li class="nav-item" *ngIf="accountService.isClient();">
+            <li class="nav-item">
               <a class="nav-link" [routerLink]="['profile']">
                 <img src="assets/img/profiles/default.png" width="32" style="border: 1px; border-style: solid; border-color: dimgray" class="rounded-circle" alt="Profile">
               </a>
