@@ -15,7 +15,9 @@
             <b>Description:</b>
           </p>
           <pre style="word-wrap: break-word; font-family: Arial, Helvetica, sans-serif">{{prod.Description}}</pre>
-          <button class="btn btn-outline-dark" style="border-radius: 0px;" (click)="this.addItemToBasket(prod.Id)">Add to basket</button>
+          <span *ngIf="accountService.isClient();">
+            <button class="btn btn-outline-dark" style="border-radius: 0px;" (click)="this.addItemToBasket(prod.Id)">Add to basket</button>
+          </span>
         </div>
       </td>
     </tr>

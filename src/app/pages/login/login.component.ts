@@ -12,10 +12,7 @@ import { AccountService } from 'src/app/services/account.service';
 })
 export class LoginComponent implements OnInit {
   
-  public form: FormGroup = new FormGroup({
-    title: new FormControl(''),
-    description: new FormControl('')
-  });
+  public form: FormGroup = new FormGroup({});
   public submitted = false;
   public message: string = '';
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { IProduct } from 'src/app/interfaces/products.interfaces';
+import { AccountService } from 'src/app/services/account.service';
 import { BasketService } from 'src/app/services/basket.service';
 import { ProductsService } from 'src/app/services/products.service';
 import { BasketComponent } from '../../basket/basket.component';
@@ -20,7 +21,8 @@ export class CatalogItemDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private productsService: ProductsService,
-    private basketService: BasketService) { }
+    private basketService: BasketService,
+    public accountService: AccountService) { }
 
   private sendQuery(id: number): void {
     this.product = this.productsService.GetProductById(id);

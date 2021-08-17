@@ -11,10 +11,7 @@ import { AccountService } from 'src/app/services/account.service';
 })
 export class SignupComponent implements OnInit {
 
-  public form: FormGroup = new FormGroup({
-    title: new FormControl(''),
-    description: new FormControl('')
-  });
+  public form: FormGroup = new FormGroup({});
   public submitted: boolean = false;
   public message: string = '';
 

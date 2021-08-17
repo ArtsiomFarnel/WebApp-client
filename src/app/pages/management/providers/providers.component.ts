@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ProvidersService } from 'src/app/services/providers.service';
 import { IProvider } from 'src/app/interfaces/providers.interfaces';
 import { PaginationService } from 'src/app/services/pagination.service';
+import { IProviderParams } from 'src/app/interfaces/params.interfaces';
 
 @Component({
   selector: 'app-providers',
@@ -13,16 +14,7 @@ import { PaginationService } from 'src/app/services/pagination.service';
 export class ProvidersComponent implements OnInit {
 
   public providers: IProvider[] = [];
-  /*
-  public metaData: Pagination = {
-    TotalPages: 0,
-    TotalCount: 0,
-    PageSize: 0,
-    HasNext: false,
-    HasPrevious: false,
-    CurrentPage: 0
-  };
-  */
+  
   public addForm: FormGroup = new FormGroup({});
   public updateForm: FormGroup = new FormGroup({});
   public deleteForm: FormGroup = new FormGroup({});
@@ -30,7 +22,7 @@ export class ProvidersComponent implements OnInit {
   public submitted = false;
   public message: string = '';
 
-  public params = {
+  public params: IProviderParams = {
     SearchTerm: '',
     PageNumber: 1,
     PageSize: 4
@@ -108,17 +100,4 @@ export class ProvidersComponent implements OnInit {
 
     this.providersService.AddProvider(provider).subscribe();
   }
-  /*
-  public leftPage(): void {
-    if (this.params.PageNumber == 1) return;
-    this.params.PageNumber--;
-    this.sendQuery();
-  }
-
-  public rightPage(): void {
-    this.params.PageNumber++;
-    if (this.params.PageNumber <= this.metaData.TotalPages) this.sendQuery();
-    else this.leftPage();
-  }
-  */
 }

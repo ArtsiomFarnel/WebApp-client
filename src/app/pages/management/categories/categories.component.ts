@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ICategory } from 'src/app/interfaces/categories.interfaces';
+import { ICategoryParams } from 'src/app/interfaces/params.interfaces';
 import { CategoriesService } from 'src/app/services/categories.service';
 import { PaginationService } from 'src/app/services/pagination.service';
 
@@ -12,16 +13,7 @@ import { PaginationService } from 'src/app/services/pagination.service';
 export class CategoriesComponent implements OnInit {
 
   public categories: ICategory[] = [];
-  /*
-  public metaData: Pagination = {
-    TotalPages: 0,
-    TotalCount: 0,
-    PageSize: 0,
-    HasNext: false,
-    HasPrevious: false,
-    CurrentPage: 0
-  };
-  */
+
   public addForm: FormGroup = new FormGroup({});
   public updateForm: FormGroup = new FormGroup({});
   public deleteForm: FormGroup = new FormGroup({});
@@ -29,7 +21,7 @@ export class CategoriesComponent implements OnInit {
   public submitted = false;
   public message: string = '';
   
-  public params = {
+  public params: ICategoryParams = {
     SearchTerm: '',
     PageNumber: 1,
     PageSize: 4
@@ -106,18 +98,4 @@ export class CategoriesComponent implements OnInit {
 
     this.categoriesService.AddCategory(category).subscribe();
   }
-
-  /*
-  public leftPage(): void {
-    if (this.params.PageNumber == 1) return;
-    this.params.PageNumber--;
-    this.sendQuery();
-  }
-
-  public rightPage(): void {
-    this.params.PageNumber++;
-    if (this.params.PageNumber <= this.metaData.TotalPages) this.sendQuery();
-    else this.leftPage();
-  }
-  */
 }

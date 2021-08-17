@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { ICategory } from 'src/app/interfaces/categories.interfaces';
+import { IProductParams } from 'src/app/interfaces/params.interfaces';
 import { IProduct, IProductDTO } from 'src/app/interfaces/products.interfaces';
 import { IProvider } from 'src/app/interfaces/providers.interfaces';
 import { CategoriesService } from 'src/app/services/categories.service';
@@ -26,19 +27,8 @@ export class ProductsComponent implements OnInit {
 
   public submitted = false;
   public message: string = '';
-  
-  /*
-  public metaData: Pagination = {
-    TotalPages: 0,
-    TotalCount: 0,
-    PageSize: 0,
-    HasNext: false,
-    HasPrevious: false,
-    CurrentPage: 0
-  };
-  */
 
-  public params = {
+  public params: IProductParams = {
     SearchTerm: '',
     Currency: 'EUR',
     OrderBy: '',
@@ -168,20 +158,5 @@ export class ProductsComponent implements OnInit {
       ProviderId: this.addForm.value.providerid
     };
     this.productsService.AddProduct(product).subscribe();
-
   }
-
-  /*
-  public leftPage(): void {
-    if (this.params.PageNumber == 1) return;
-    this.params.PageNumber--;
-    this.sendQuery();
-  }
-
-  public rightPage(): void {
-    this.params.PageNumber++;
-    if (this.params.PageNumber <= this.metaData.TotalPages) this.sendQuery();
-    else this.leftPage();
-  }
-  */
 }

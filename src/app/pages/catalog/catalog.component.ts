@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ICategory } from 'src/app/interfaces/categories.interfaces';
+import { IProductParams } from 'src/app/interfaces/params.interfaces';
 import { IProduct } from 'src/app/interfaces/products.interfaces';
 import { IProvider } from 'src/app/interfaces/providers.interfaces';
 import { CategoriesService } from 'src/app/services/categories.service';
@@ -20,18 +21,7 @@ export class CatalogComponent implements OnInit {
   public products: IProduct[] = [];
   public isLoading: boolean = false;
 
-  /*
-  public metaData: Pagination = {
-    TotalPages: 0,
-    TotalCount: 0,
-    PageSize: 0,
-    HasNext: false,
-    HasPrevious: false,
-    CurrentPage: 0
-  };
-  */
-
-  public params = {
+  public params: IProductParams = {
     SearchTerm: '',
     Currency: 'EUR',
     OrderBy: '',
@@ -52,7 +42,6 @@ export class CatalogComponent implements OnInit {
     this.isLoading = true;
     this.productsService.GetAllProducts(this.params).subscribe(data => {
       this.products = data.body;
-      //this.metaData = JSON.parse(data.headers.get('pagination'));
       this.paginationService.metaData = JSON.parse(data.headers.get('pagination'));
       this.isLoading = false;
     });
@@ -89,17 +78,4 @@ export class CatalogComponent implements OnInit {
     this.params.ProviderId = Number((<HTMLInputElement>document.getElementById('provider')).value);
     this.sendQuery();
   }
-  /*
-  public leftPage(): void {
-    if (this.params.PageNumber == 1) return;
-    this.params.PageNumber--;
-    this.sendQuery();
-  }
-
-  public rightPage(): void {
-    this.params.PageNumber++;
-    if (this.params.PageNumber <= this.metaData.TotalPages) this.sendQuery();
-    else this.leftPage();
-  }
-  */
 }
