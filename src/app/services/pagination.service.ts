@@ -1,12 +1,12 @@
 import { Injectable } from "@angular/core";
-import { Pagination } from "../interfaces/pagination.interfaces";
+import { IPagination } from "../interfaces/pagination.interfaces";
 
 @Injectable({providedIn: 'root'})
 export class PaginationService {
 
   constructor() { }  
 
-  public metaData: Pagination = {
+  public metaData: IPagination = {
     TotalPages: 0,
     TotalCount: 0,
     PageSize: 0,

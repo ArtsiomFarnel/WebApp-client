@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { UserLogin } from 'src/app/interfaces/account.interfaces';
+import { IUserLogin } from 'src/app/interfaces/account.interfaces';
 import { AccountService } from 'src/app/services/account.service';
 
 @Component({
@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
     
     this.submitted = true;
 
-    const user: UserLogin = {
+    const user: IUserLogin = {
       UserName: this.form.value.login,
       Password: this.form.value.password
     };

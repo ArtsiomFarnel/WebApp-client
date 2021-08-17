@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Product } from 'src/app/interfaces/products.interfaces';
+import { IProduct } from 'src/app/interfaces/products.interfaces';
 import { BasketService } from 'src/app/services/basket.service';
 import { ProductsService } from 'src/app/services/products.service';
 import { BasketComponent } from '../../basket/basket.component';
@@ -15,7 +15,7 @@ export class CatalogItemDetailComponent implements OnInit {
 
   private Id: number = 0;
 
-  public product: Observable<Product> | undefined;
+  public product: Observable<IProduct> | undefined;
 
   constructor(
     private route: ActivatedRoute,

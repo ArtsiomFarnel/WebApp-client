@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Category } from 'src/app/interfaces/categories.interfaces';
-import { Pagination } from 'src/app/interfaces/pagination.interfaces';
-import { Product } from 'src/app/interfaces/products.interfaces';
-import { Provider } from 'src/app/interfaces/providers.interfaces';
+import { ICategory } from 'src/app/interfaces/categories.interfaces';
+import { IProduct } from 'src/app/interfaces/products.interfaces';
+import { IProvider } from 'src/app/interfaces/providers.interfaces';
 import { CategoriesService } from 'src/app/services/categories.service';
 import { PaginationService } from 'src/app/services/pagination.service';
 import { ProductsService } from 'src/app/services/products.service';
@@ -16,9 +15,9 @@ import { ProvidersService } from 'src/app/services/providers.service';
 })
 export class CatalogComponent implements OnInit {
 
-  public categories$: Observable<Category[]> | undefined;
-  public providers$: Observable<Provider[]> | undefined;
-  public products: Product[] = [];
+  public categories$: Observable<ICategory[]> | undefined;
+  public providers$: Observable<IProvider[]> | undefined;
+  public products: IProduct[] = [];
   public isLoading: boolean = false;
 
   /*

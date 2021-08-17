@@ -1,9 +1,9 @@
-export interface UserLogin {
+export interface IUserLogin {
   UserName: string;
   Password: string;
 }
   
-export interface UserSignup {
+export interface IUserSignup {
   FirstName: string,
   LastName: string,
   UserName: string;
@@ -14,7 +14,7 @@ export interface UserSignup {
   Roles: string[]
 }
 
-export interface UserData {
+export interface IUserData {
   firstName: string,
   lastName: string,
   userName: string,

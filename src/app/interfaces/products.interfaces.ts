@@ -1,4 +1,4 @@
-export interface Product {
+export interface IProduct {
   Id?: number;
   Name: string;
   Description: string;
@@ -8,7 +8,7 @@ export interface Product {
   Provider: string;
 }
 
-export interface ProductDTO {
+export interface IProductDTO {
   Id?: number;
   Name: string;
   Description: string;

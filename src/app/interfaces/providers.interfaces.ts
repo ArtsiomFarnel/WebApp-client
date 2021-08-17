@@ -1,4 +1,4 @@
-export interface Provider {
+export interface IProvider {
   Id?: number;
   Name: string;
 }

@@ -1,4 +1,4 @@
-export interface Pagination {
+export interface IPagination {
   CurrentPage: number;
   HasNext: boolean;
   HasPrevious: boolean;

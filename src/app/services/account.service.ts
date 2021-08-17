@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, Subject, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
-import { UserData, UserLogin, UserSignup } from '../interfaces/account.interfaces';
+import { IUserData, IUserLogin, IUserSignup } from '../interfaces/account.interfaces';
 
 @Injectable({providedIn: 'root'})
 export class AccountService {
@@ -22,18 +22,18 @@ export class AccountService {
     return localStorage.getItem('fb-token');
   }
 
-  public getUserData(): Observable<UserData> {
-    return this.http.get<UserData>(`${this.pathBase}get_user_data`);
+  public getUserData(): Observable<IUserData> {
+    return this.http.get<IUserData>(`${this.pathBase}get_user_data`);
   }
 
-  public login(user: UserLogin): Observable<any> {
+  public login(user: IUserLogin): Observable<any> {
     return this.http.post(`${this.pathBase}authenticate`, user).pipe(
       tap((result: any) => this.setToken(result)),
       catchError(this.handleError.bind(this))
     );
   }
 
-  public signup(user: UserSignup): Observable<any> {
+  public signup(user: IUserSignup): Observable<any> {
     return this.http.post(`${this.pathBase}register`, user).pipe(
       tap((result: any) => this.setToken(result)),
       catchError(this.handleError.bind(this))

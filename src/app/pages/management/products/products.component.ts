@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { Category } from 'src/app/interfaces/categories.interfaces';
-import { Pagination } from 'src/app/interfaces/pagination.interfaces';
-import { Product, ProductDTO } from 'src/app/interfaces/products.interfaces';
-import { Provider } from 'src/app/interfaces/providers.interfaces';
+import { ICategory } from 'src/app/interfaces/categories.interfaces';
+import { IProduct, IProductDTO } from 'src/app/interfaces/products.interfaces';
+import { IProvider } from 'src/app/interfaces/providers.interfaces';
 import { CategoriesService } from 'src/app/services/categories.service';
 import { PaginationService } from 'src/app/services/pagination.service';
 import { ProductsService } from 'src/app/services/products.service';
@@ -17,9 +16,9 @@ import { ProvidersService } from 'src/app/services/providers.service';
 })
 export class ProductsComponent implements OnInit {
 
-  public categories$: Observable<Category[]> | undefined;
-  public providers$: Observable<Provider[]> | undefined;
-  public products: Product[] = [];
+  public categories$: Observable<ICategory[]> | undefined;
+  public providers$: Observable<IProvider[]> | undefined;
+  public products: IProduct[] = [];
 
   public addForm: FormGroup = new FormGroup({});
   public updateForm: FormGroup = new FormGroup({});
@@ -115,7 +114,7 @@ export class ProductsComponent implements OnInit {
     this.sendQuery();
   }
 
-  public putDataToUpdate(product: Product): void {
+  public putDataToUpdate(product: IProduct): void {
     this.updateForm.controls['oldname'].setValue(product.Name);
     this.updateForm.controls['oldcost'].setValue(product.Cost);
     this.updateForm.controls['olddescription'].setValue(product.Description);
@@ -124,7 +123,7 @@ export class ProductsComponent implements OnInit {
     this.updateForm.controls['updateid'].setValue(product.Id);
   }
 
-  public putDataToDelete(product: Product): void {
+  public putDataToDelete(product: IProduct): void {
     this.deleteForm.controls['deleteid'].setValue(product.Id);
   }
 
@@ -134,7 +133,7 @@ export class ProductsComponent implements OnInit {
     this.submitted = true;
 
     
-    const product: ProductDTO = {
+    const product: IProductDTO = {
       Name: this.updateForm.value.oldname,
       Id: this.updateForm.value.updateid,
       Cost: this.updateForm.value.oldcost,
@@ -159,7 +158,7 @@ export class ProductsComponent implements OnInit {
     
     this.submitted = true;
 
-    const product: ProductDTO = {
+    const product: IProductDTO = {
       Name: this.addForm.value.name,
       Id: this.addForm.value.updateid,
       Description: this.addForm.value.description,

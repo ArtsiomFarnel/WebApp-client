@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Category } from 'src/app/interfaces/categories.interfaces';
-import { Pagination } from 'src/app/interfaces/pagination.interfaces';
+import { ICategory } from 'src/app/interfaces/categories.interfaces';
 import { CategoriesService } from 'src/app/services/categories.service';
 import { PaginationService } from 'src/app/services/pagination.service';
 
@@ -12,7 +11,7 @@ import { PaginationService } from 'src/app/services/pagination.service';
 })
 export class CategoriesComponent implements OnInit {
 
-  public categories: Category[] = [];
+  public categories: ICategory[] = [];
   /*
   public metaData: Pagination = {
     TotalPages: 0,
@@ -68,12 +67,12 @@ export class CategoriesComponent implements OnInit {
     this.sendQuery();
   }
 
-  public putDataToUpdate(category: Category): void {
+  public putDataToUpdate(category: ICategory): void {
     this.updateForm.controls['oldname'].setValue(category.Name);
     this.updateForm.controls['updateid'].setValue(category.Id);
   }
 
-  public putDataToDelete(category: Category): void {
+  public putDataToDelete(category: ICategory): void {
     this.deleteForm.controls['deleteid'].setValue(category.Id);
   }
 
@@ -82,7 +81,7 @@ export class CategoriesComponent implements OnInit {
     
     this.submitted = true;
 
-    const category: Category = {
+    const category: ICategory = {
       Name: this.updateForm.value.oldname,
       Id: this.updateForm.value.updateid
     };
@@ -101,7 +100,7 @@ export class CategoriesComponent implements OnInit {
     
     this.submitted = true;
 
-    const category: Category = {
+    const category: ICategory = {
       Name: this.addForm.value.name
     };
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BasketItem } from 'src/app/interfaces/baskets.interfaces';
+import { IBasketItem } from 'src/app/interfaces/baskets.interfaces';
 import { BasketService } from 'src/app/services/basket.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { BasketService } from 'src/app/services/basket.service';
 })
 export class BasketComponent implements OnInit {
 
-  public basketItems: BasketItem[] = [];
+  public basketItems: IBasketItem[] = [];
 
   public params = {
     SearchTerm: '',

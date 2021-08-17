@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { UserSignup } from 'src/app/interfaces/account.interfaces';
+import { IUserSignup } from 'src/app/interfaces/account.interfaces';
 import { AccountService } from 'src/app/services/account.service';
 
 @Component({
@@ -48,7 +48,7 @@ export class SignupComponent implements OnInit {
     
     this.submitted = true;
 
-    const user: UserSignup = {
+    const user: IUserSignup = {
       UserName: this.form.value.login,
       Password: this.form.value.password,
       FirstName: this.form.value.firstname,

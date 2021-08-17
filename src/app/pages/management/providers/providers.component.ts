@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ProvidersService } from 'src/app/services/providers.service';
-import { Pagination } from 'src/app/interfaces/pagination.interfaces';
-import { Provider } from 'src/app/interfaces/providers.interfaces';
+import { IProvider } from 'src/app/interfaces/providers.interfaces';
 import { PaginationService } from 'src/app/services/pagination.service';
 
 @Component({
@@ -13,7 +12,7 @@ import { PaginationService } from 'src/app/services/pagination.service';
 })
 export class ProvidersComponent implements OnInit {
 
-  public providers: Provider[] = [];
+  public providers: IProvider[] = [];
   /*
   public metaData: Pagination = {
     TotalPages: 0,
@@ -70,12 +69,12 @@ export class ProvidersComponent implements OnInit {
     this.sendQuery();
   }
 
-  public putDataToUpdate(provider: Provider): void {
+  public putDataToUpdate(provider: IProvider): void {
     this.updateForm.controls['oldname'].setValue(provider.Name);
     this.updateForm.controls['updateid'].setValue(provider.Id);
   }
 
-  public putDataToDelete(provider: Provider): void {
+  public putDataToDelete(provider: IProvider): void {
     this.deleteForm.controls['deleteid'].setValue(provider.Id);
   }
 
@@ -84,7 +83,7 @@ export class ProvidersComponent implements OnInit {
     
     this.submitted = true;
 
-    const provider: Provider = {
+    const provider: IProvider = {
       Name: this.updateForm.value.oldname,
       Id: this.updateForm.value.updateid
     };
@@ -103,7 +102,7 @@ export class ProvidersComponent implements OnInit {
     
     this.submitted = true;
 
-    const provider: Provider = {
+    const provider: IProvider = {
       Name: this.addForm.value.name
     };
 

@@ -1,7 +1,7 @@
 import { HttpClient, HttpResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { Product, ProductDTO } from "../interfaces/products.interfaces";
+import { IProduct, IProductDTO } from "../interfaces/products.interfaces";
 
 @Injectable({providedIn: 'root'})
 export class ProductsService {
@@ -15,16 +15,16 @@ export class ProductsService {
     return this.http.get<any>(`${this.pathBase}get_all_products`, {observe: 'response', params});
   }
 
-  public GetProductById(id: any): Observable<Product> {
-    return this.http.get<Product>(`${this.pathBase}get_product/${id}`);
+  public GetProductById(id: any): Observable<IProduct> {
+    return this.http.get<IProduct>(`${this.pathBase}get_product/${id}`);
   }
 
-  public AddProduct(product: ProductDTO): Observable<ProductDTO> {
-    return this.http.post<ProductDTO>(`${this.pathBase}add_product`, product);
+  public AddProduct(product: IProductDTO): Observable<IProductDTO> {
+    return this.http.post<IProductDTO>(`${this.pathBase}add_product`, product);
   }
 
-  public UpdateProduct(product: ProductDTO): Observable<ProductDTO> {
-    return this.http.put<ProductDTO>(`${this.pathBase}update_product/${product.Id}`, product);
+  public UpdateProduct(product: IProductDTO): Observable<IProductDTO> {
+    return this.http.put<IProductDTO>(`${this.pathBase}update_product/${product.Id}`, product);
   }
 
   public DeleteProduct(id: any): Observable<any> {
