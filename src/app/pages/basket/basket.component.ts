@@ -19,11 +19,15 @@ export class BasketComponent implements OnInit {
     PageSize: 4
   }
 
+  public TotalCost: number = 0;
+  public TotalAmount: number = 0;
+
   constructor(private basketService: BasketService) { }
 
   public sendQuery(): void {
     this.basketService.GetAllBasketItems(this.params).subscribe(data => {
       this.basketItems = data.body;
+      //...
       //this.metaData = JSON.parse(data.headers.get('pagination'));
       //this.paginationService.metaData = JSON.parse(data.headers.get('pagination'));
     });
