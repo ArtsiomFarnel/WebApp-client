@@ -1,6 +1,8 @@
 import { HttpClient, HttpResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
+import { getProductsUrl } from "../functions/get-urls";
+import { IProductParams } from "../interfaces/params.interfaces";
 import { IProduct, IProductDTO } from "../interfaces/products.interfaces";
 
 @Injectable({providedIn: 'root'})
@@ -11,8 +13,13 @@ export class ProductsService {
 
   constructor(private http: HttpClient) { }
 
+  /*
   public GetAllProducts(params : any): Observable<any> {
     return this.http.get<any>(`${this.pathBase}get_all_products`, {observe: 'response', params});
+  }
+  */
+  public GetAllProducts(params: IProductParams): Observable<any> {
+    return this.http.get<any>(getProductsUrl(`${this.pathBase}get_all_products`, params), { observe: 'response' });
   }
 
   public GetProductById(id: any): Observable<IProduct> {

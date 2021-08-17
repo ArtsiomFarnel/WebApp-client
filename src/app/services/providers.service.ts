@@ -1,6 +1,8 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
+import { getProvidersUrl } from "../functions/get-urls";
+import { IProviderParams } from "../interfaces/params.interfaces";
 import { IProvider } from "../interfaces/providers.interfaces";
 
 @Injectable({providedIn: 'root'})
@@ -15,8 +17,13 @@ export class ProvidersService {
     return this.http.get<IProvider[]>(`${this.pathBase}get_all_providers`);
   }
 
+  /*
   public GetAllProviders(params : any): Observable<any> {
     return this.http.get<any>(`${this.pathBase}get_all_providers`, {observe: 'response', params});
+  }
+  */
+  public GetAllProviders(params : IProviderParams): Observable<any> {
+    return this.http.get<any>(getProvidersUrl(`${this.pathBase}get_all_providers`, params), {observe: 'response'});
   }
 
   public GetProviderById(id: any): Observable<IProvider> {

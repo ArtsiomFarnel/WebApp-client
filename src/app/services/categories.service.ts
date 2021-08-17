@@ -1,7 +1,9 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
+import { getCategoriesUrl } from "../functions/get-urls";
 import { ICategory } from "../interfaces/categories.interfaces";
+import { ICategoryParams } from "../interfaces/params.interfaces";
 
 @Injectable({providedIn: 'root'})
 export class CategoriesService {
@@ -14,9 +16,13 @@ export class CategoriesService {
   public GetCategories(): Observable<ICategory[]> {
     return this.http.get<ICategory[]>(`${this.pathBase}get_all_categories`);
   }
-
+  /*
   public GetAllCategories(params : any): Observable<any> {
     return this.http.get<any>(`${this.pathBase}get_all_categories`, {observe: 'response', params});
+  }
+  */
+  public GetAllCategories(params : ICategoryParams): Observable<any> {
+    return this.http.get<any>(getCategoriesUrl(`${this.pathBase}get_all_categories`, params), {observe: 'response'});
   }
 
   public GetCategoryById(id: any): Observable<ICategory> {
