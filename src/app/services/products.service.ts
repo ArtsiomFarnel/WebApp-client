@@ -7,7 +7,7 @@ import { IProduct, IProductDTO } from "../interfaces/products.interfaces";
 export class ProductsService {
 
   //private pathBase: string = "https://localhost:5001/v2/products/";
-  private pathBase: string = "https://leeqviz-web-api.azurewebsites.net/v2/products/";
+  private pathBase: string = "https://leeqviz-web-api.azurewebsites.net/v1/products/";
 
   constructor(private http: HttpClient) { }
 

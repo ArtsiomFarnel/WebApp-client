@@ -7,7 +7,7 @@ import { IProvider } from "../interfaces/providers.interfaces";
 export class ProvidersService {
 
   //private pathBase: string = "https://localhost:5001/v2/providers/";
-  private pathBase: string = "https://leeqviz-web-api.azurewebsites.net/v2/providers/";
+  private pathBase: string = "https://leeqviz-web-api.azurewebsites.net/v1/providers/";
 
   constructor(private http: HttpClient) { }
 
