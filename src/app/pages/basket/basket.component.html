@@ -12,7 +12,7 @@
       <tr>
         <td>{{item.ProductName}}</td>
         <td>{{item.ProductCost}}</td>
-        <td>{{item.Amount}}</td>
+        <td><input value="{{item.Amount}}" id="amount" type="number" min="0" (change)="this.changeAmount(item.Id)"></td>
         <td>
           <div style="display: inline-block" class="btn-group-vertical btn-block">
             <button class="btn btn-outline-dark" style="border-radius: 0px;" (click)="this.deleteItemFromBasket(item.Id)" >Remove</button>

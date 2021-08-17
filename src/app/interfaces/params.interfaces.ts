@@ -21,3 +21,7 @@ export interface IProviderParams extends ICommonParams {
 export interface ICategoryParams extends ICommonParams {
   Fields?: string
 }
+
+export interface IBasketParams extends ICommonParams {
+    Fields?: string
+  }

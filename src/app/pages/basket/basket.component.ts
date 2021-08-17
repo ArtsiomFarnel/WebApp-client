@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { IBasketItem } from 'src/app/interfaces/baskets.interfaces';
+import { IBasketItem, IBasketItemAmount } from 'src/app/interfaces/baskets.interfaces';
+import { IBasketParams } from 'src/app/interfaces/params.interfaces';
 import { BasketService } from 'src/app/services/basket.service';
 
 @Component({
@@ -11,12 +12,9 @@ export class BasketComponent implements OnInit {
 
   public basketItems: IBasketItem[] = [];
 
-  public params = {
+  public params: IBasketParams = {
     SearchTerm: '',
-    Currency: 'EUR',
     OrderBy: '',
-    CategoryId: 0,
-    ProviderId: 0,
     PageNumber: 1,
     PageSize: 4
   }
@@ -38,5 +36,13 @@ export class BasketComponent implements OnInit {
   public deleteItemFromBasket(id: number | undefined): void {
     this.basketService.DeleteItemFromBasket(id).subscribe();
     this.sendQuery();
+  }
+
+  public changeAmount(id: number | undefined): void {
+    const basketItem: IBasketItemAmount = {
+      Id: id,
+      Amount: Number((<HTMLInputElement>document.getElementById('amount')).value)
+    };
+    this.basketService.ChangeImtemAmount(basketItem).subscribe();
   }
 }
