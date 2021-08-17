@@ -8,7 +8,7 @@ import { ManagementComponent } from './pages/management/management.component';
 import { ProductsComponent } from './pages/management/products/products.component';
 import { ProvidersComponent } from './pages/management/providers/providers.component';
 import { SignupComponent } from './pages/signup/signup.component';
-import { AccountGuard } from './services/guards/account.guard';
+import { AuthGuard } from './services/guards/auth.guard';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { AboutComponent } from './pages/about/about.component';
 import { PrivacyComponent } from './pages/privacy/privacy.component';
@@ -25,8 +25,8 @@ const routes: Routes = [
   { path: "signup", component: SignupComponent },
   { path: "catalog", component: CatalogComponent },
   { path: "catalog/item-detail/:id", component: CatalogItemDetailComponent },
-  { path: "profile", component: ProfileComponent, canActivate: [AccountGuard] },
-  { path: "basket", component: BasketComponent, canActivate: [AccountGuard, ClientGuard] },
+  { path: "profile", component: ProfileComponent, canActivate: [AuthGuard] },
+  { path: "basket", component: BasketComponent, canActivate: [AuthGuard, ClientGuard] },
   { 
     path: "management", 
     component: ManagementComponent, 
@@ -35,7 +35,7 @@ const routes: Routes = [
       { path: "categories", component: CategoriesComponent },
       { path: "products", component: ProductsComponent },
     ], 
-    canActivate: [AccountGuard, AdministratorGuard] 
+    canActivate: [AuthGuard, AdministratorGuard] 
   },
   { path: "**", redirectTo: "", pathMatch: "full" }
 ];

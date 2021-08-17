@@ -11,7 +11,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './pages/login/login.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { AccountGuard } from './services/guards/account.guard';
+import { AuthGuard } from './services/guards/auth.guard';
 import { CatalogComponent } from './pages/catalog/catalog.component';
 import { ManagementComponent } from './pages/management/management.component';
 import { ProfileComponent } from './pages/profile/profile.component';
@@ -58,7 +58,7 @@ import { AdministratorGuard } from './services/guards/administrator.guard';
     NgbModule,
   ],
   providers: [
-    AccountGuard,
+    AuthGuard,
     ClientGuard,
     AdministratorGuard,
     AccountService,
