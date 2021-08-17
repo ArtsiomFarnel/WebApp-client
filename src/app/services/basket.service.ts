@@ -6,7 +6,7 @@ import { Observable } from "rxjs";
 export class BasketService {
 
   //private pathBase: string = "https://localhost:5001/v2/baskets/";
-  private pathBase: string = "https://leeqviz-web-api.azurewebsites.net/v2/baskets/";
+  private pathBase: string = "https://leeqviz-web-api.azurewebsites.net/v1/baskets/";
 
   constructor(private http: HttpClient) { }
 

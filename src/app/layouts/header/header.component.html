@@ -15,9 +15,11 @@
             <li class="nav-item active">
               <a class="nav-link text-dark" [routerLink]="['about']" class="nav-link"><h4>About</h4></a>
             </li>
-            <li class="nav-item active" *ngIf="accountService.isAuthenticated();">
-              <a class="nav-link text-dark" [routerLink]="['management']" class="nav-link"><h4>Management</h4></a>
-            </li>
+            <span *ngIf="accountService.isAuthenticated();">
+              <li class="nav-item active" *ngIf="accountService.isAdministrator();">
+                  <a class="nav-link text-dark" [routerLink]="['management']" class="nav-link"><h4>Management</h4></a>
+              </li>
+            </span>
           </ul>
         </div>
         <div style="text-align: right">

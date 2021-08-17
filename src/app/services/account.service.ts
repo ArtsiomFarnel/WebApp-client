@@ -53,6 +53,11 @@ export class AccountService {
     else return false;
   }
 
+  public isAdministrator(): boolean {
+    if (localStorage.getItem('fb-roles') == 'Administrator') return true;
+    else return false;
+  }
+
   private handleError(error: HttpErrorResponse): Observable<never> {
     const {message} = error.error;     
     switch (message) {
