@@ -9,8 +9,7 @@
       <label class="col-form-label" style="font-weight: bold" for="login">Username: </label>
       <input class="form-control" style="border-radius: 0px;" id="login" type="text" formControlName="login">
       <div class="validation" *ngIf="form.get('login')?.touched && form.get('login')?.invalid">
-        <small *ngIf="form.get('login')?.errors?.required">Enter email field.</small>
-        <small *ngIf="form.get('login')?.errors?.email">Invalid email.</small>
+        <small *ngIf="form.get('login')?.errors?.required">Enter username.</small>
       </div>
     </div>
 

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, Subject, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
-import { IUserData, IUserLogin, IUserSignup } from '../interfaces/account.interfaces';
+import { IChangePassword, IUserData, IUserLogin, IUserSignup, IUserValidation } from '../interfaces/account.interfaces';
 
 @Injectable({providedIn: 'root'})
 export class AccountService {
@@ -24,6 +24,14 @@ export class AccountService {
 
   public getUserData(): Observable<IUserData> {
     return this.http.get<IUserData>(`${this.pathBase}get_user_data`);
+  }
+
+  public deleteUser(user: IUserValidation): Observable<any> {
+    return this.http.delete<any>(`${this.pathBase}delete_user`, {body: user});
+  }
+
+  public changePassword(passwords: IChangePassword): Observable<any> {
+    return this.http.put<any>(`${this.pathBase}change_password`, passwords);
   }
 
   public login(user: IUserLogin): Observable<any> {

@@ -28,3 +28,12 @@ export interface IUserData {
   //TwoFactorEnabled: boolean
 }
 
+export interface IUserValidation {
+  UserName: string;
+  Password: string;
+}
+
+export interface IChangePassword {
+  OldPassword: string;
+  NewPassword: string;
+}
