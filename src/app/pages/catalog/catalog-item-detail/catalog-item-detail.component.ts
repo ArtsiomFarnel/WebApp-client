@@ -1,9 +1,11 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { IProduct } from 'src/app/interfaces/products.interfaces';
 import { AccountService } from 'src/app/services/account.service';
 import { BasketService } from 'src/app/services/basket.service';
+import { NotificationService } from 'src/app/services/notification.service';
 import { ProductsService } from 'src/app/services/products.service';
 import { BasketComponent } from '../../basket/basket.component';
 
@@ -22,7 +24,8 @@ export class CatalogItemDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private productsService: ProductsService,
     private basketService: BasketService,
-    public accountService: AccountService) { }
+    public accountService: AccountService,
+    private notificationService: NotificationService) { }
 
   private sendQuery(id: number): void {
     this.product = this.productsService.GetProductById(id);
@@ -33,8 +36,12 @@ export class CatalogItemDetailComponent implements OnInit {
     this.sendQuery(this.Id);
   }
 
-  public addItemToBasket(id: number | undefined): void {
-    this.basketService.AddItemToBasket(id).subscribe();
+  public addItemToBasket(product: IProduct): void {
+    this.basketService.AddItemToBasket(product?.Id).subscribe(() => {
+      this.notificationService.productNotice(`Product ${product?.Name} was added to basket`, product);
+    }, (error: HttpErrorResponse) => {
+      this.notificationService.textNotice(`Something went wrong`);
+    });
   }
 
 }

@@ -52,7 +52,7 @@ export class ProvidersComponent implements OnInit {
     this.params.PageNumber = this.paginationService.metaData.CurrentPage;
     this.providersService.GetAllProviders(this.params).subscribe(data => {
       this.providers = data.body;
-      this.paginationService.metaData = JSON.parse(data.headers.get('pagination'));
+      this.paginationService.metaData.TotalPages = JSON.parse(data.headers.get('pagination')).TotalPages;
     });
   }
 

@@ -5,6 +5,7 @@ import { IProductParams } from 'src/app/interfaces/params.interfaces';
 import { IProduct } from 'src/app/interfaces/products.interfaces';
 import { IProvider } from 'src/app/interfaces/providers.interfaces';
 import { CategoriesService } from 'src/app/services/categories.service';
+import { NotificationService } from 'src/app/services/notification.service';
 import { PaginationService } from 'src/app/services/pagination.service';
 import { ProductsService } from 'src/app/services/products.service';
 import { ProvidersService } from 'src/app/services/providers.service';
@@ -35,14 +36,15 @@ export class CatalogComponent implements OnInit {
     private productsService: ProductsService,
     private providersService: ProvidersService,
     private categoriesServie: CategoriesService,
-    private paginationService: PaginationService) { }
+    private paginationService: PaginationService,
+    private notificationService: NotificationService) { }
 
   public sendQuery(): void {
     this.params.PageNumber = this.paginationService.metaData.CurrentPage;
     this.isLoading = true;
     this.productsService.GetAllProducts(this.params).subscribe(data => {
       this.products = data.body;
-      this.paginationService.metaData = JSON.parse(data.headers.get('pagination'));
+      this.paginationService.metaData.TotalPages = JSON.parse(data.headers.get('pagination')).TotalPages;
       this.isLoading = false;
     });
   }

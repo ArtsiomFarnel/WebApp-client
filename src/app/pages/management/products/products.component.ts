@@ -48,7 +48,7 @@ export class ProductsComponent implements OnInit {
     this.params.PageNumber = this.paginationService.metaData.CurrentPage;
     this.productsService.GetAllProducts(this.params).subscribe(data => {
       this.products = data.body;
-      this.paginationService.metaData = JSON.parse(data.headers.get('pagination'));
+      this.paginationService.metaData.TotalPages = JSON.parse(data.headers.get('pagination')).TotalPages;
     });
   }
   

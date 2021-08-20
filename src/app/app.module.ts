@@ -27,6 +27,7 @@ import { CatalogItemDetailComponent } from './pages/catalog/catalog-item-detail/
 import { BasketComponent } from './pages/basket/basket.component';
 import { ClientGuard } from './services/guards/client.guard';
 import { AdministratorGuard } from './services/guards/administrator.guard';
+import { NotificationComponent } from './layouts/notification/notification.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { AdministratorGuard } from './services/guards/administrator.guard';
     PaginationComponent,
     LoadingComponent,
     CatalogItemDetailComponent,
-    BasketComponent
+    BasketComponent,
+    NotificationComponent
   ],
   imports: [
     BrowserModule,

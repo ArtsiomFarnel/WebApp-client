@@ -50,7 +50,7 @@ export class CategoriesComponent implements OnInit {
     this.params.PageNumber = this.paginationService.metaData.CurrentPage;
     this.categoriesService.GetAllCategories(this.params).subscribe(data => {
       this.categories = data.body;
-      this.paginationService.metaData = JSON.parse(data.headers.get('pagination'));
+      this.paginationService.metaData.TotalPages = JSON.parse(data.headers.get('pagination')).TotalPages;
     });
   }
 
