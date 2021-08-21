@@ -6,8 +6,8 @@ import { IBasketItemAmount } from "../interfaces/baskets.interfaces";
 @Injectable({providedIn: 'root'})
 export class BasketService {
 
-  //private pathBase: string = "https://localhost:5001/v1/baskets/";
-  private pathBase: string = "https://leeqviz-web-api.azurewebsites.net/v1/baskets/";
+  private pathBase: string = "https://localhost:5001/v1/baskets/";
+  //private pathBase: string = "https://leeqviz-web-api.azurewebsites.net/v1/baskets/";
 
   constructor(private http: HttpClient) { }
 

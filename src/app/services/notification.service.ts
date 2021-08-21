@@ -1,18 +1,11 @@
 import { Injectable } from "@angular/core";
 import { Subject } from "rxjs";
 import { IProduct } from "../interfaces/products.interfaces";
-
-export type NotificationType = 'text' | 'product';
-
-export interface Notification {
-    type: NotificationType,
-    text: string,
-    product?: IProduct,
-}
+import { INotification } from "../interfaces/notification.interfaces";
 
 @Injectable({ providedIn: 'root' })
 export class NotificationService {
-    public notification$ = new Subject<Notification>();
+    public notification$ = new Subject<INotification>();
 
     textNotice(text: string) {
         this.notification$.next({ type: 'text', text })

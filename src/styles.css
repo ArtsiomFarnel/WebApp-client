@@ -1,3 +1,8 @@
+:root{
+  --gray-block-color: #001514;
+  --light-gray-color: #C8BBB5;
+}
+
 /* You can add global styles to this file, and also import other style files */
 a.navbar-brand {
   white-space: normal;

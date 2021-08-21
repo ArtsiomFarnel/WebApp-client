@@ -8,8 +8,8 @@ import { IChangePassword, IUserData, IUserLogin, IUserSignup, IUserValidation } 
 export class AccountService {
 
   public error$: Subject<string> = new Subject<string>();
-  //private pathBase: string = "https://localhost:5001/account/";
-  private pathBase: string = "https://leeqviz-web-api.azurewebsites.net/account/";
+  private pathBase: string = "https://localhost:5001/account/";
+  //private pathBase: string = "https://leeqviz-web-api.azurewebsites.net/account/";
 
   constructor(private http: HttpClient) { }
 

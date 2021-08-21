@@ -8,8 +8,8 @@ import { ICategoryParams } from "../interfaces/params.interfaces";
 @Injectable({providedIn: 'root'})
 export class CategoriesService {
 
-  //private pathBase: string = "https://localhost:5001/v1/categories/";
-  private pathBase: string = "https://leeqviz-web-api.azurewebsites.net/v1/categories/";
+  private pathBase: string = "https://localhost:5001/v1/categories/";
+  //private pathBase: string = "https://leeqviz-web-api.azurewebsites.net/v1/categories/";
 
   constructor(private http: HttpClient) { }
 
