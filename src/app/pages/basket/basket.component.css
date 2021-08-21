@@ -1,0 +1,17 @@
+.main-container {
+    margin-left: 100px;
+    margin-right: 100px;
+}
+.form-menu {
+    border: 1px solid dimgray;
+    padding: 14px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+}
+.item-container {
+    padding: 10px;
+    border: 1px solid dimgray;
+    margin-top: 10px;
+}
+    .item-container:hover {
+        box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+    }

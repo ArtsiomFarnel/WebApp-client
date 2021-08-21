@@ -27,7 +27,7 @@ export class BasketComponent implements OnInit {
     private basketService: BasketService,
     private paginationService: PaginationService) { }
 
-  public countAll(){
+  public countAll(): void {
     this.totalAmount = 0;
     this.totalCost = 0;
     this.basketItems.forEach(element => {
@@ -57,10 +57,12 @@ export class BasketComponent implements OnInit {
   public changeAmount(id: number | undefined): void {
     const inputChange = <HTMLInputElement>document.getElementById(String(id));
     inputChange.setAttribute("disabled","disabled");
+
     const basketItem: IBasketItemAmount = {
       Id: id,
       Amount: Number(inputChange.value)
     };
+
     this.basketService.ChangeItemAmount(basketItem).subscribe(data => {
       this.sendQuery()
       inputChange.removeAttribute("disabled");

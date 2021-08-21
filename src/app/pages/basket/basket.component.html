@@ -1,24 +1,42 @@
-<div>
-  <table class="table table-bordered table-sm">
-    <thead>
+<div class="main-container">
+  <div class="container form-menu">
+    <h4>Total</h4>
+    <div class="form-group row">
+      <label class="col-sm-2" style="font-weight: bold">Cost:</label>
+      <div class="col-sm-4">
+        {{this.totalCost.toFixed(2)}}
+      </div>
+      <label class="col-sm-2" style="font-weight: bold">Amount:</label>
+      <div class="col-sm-4">
+        {{this.totalAmount.toFixed(0)}}
+      </div>
+    </div>
+    <hr style="background-color: dimgray; height: 1px;" />
+  </div>
+  <div class="item-container" *ngFor="let item of basketItems">
+    <table>
       <tr>
-        <th>Name</th>
-        <th>Cost</th>
-        <th>Amount</th>
-        <th>Operation</th>
-      </tr>
-    </thead>
-    <tbody *ngFor="let item of basketItems">
-      <tr>
-        <td>{{item.ProductName}}</td>
-        <td>{{item.ProductCost}}</td>
-        <td><input value="{{item.Amount}}" id="{{item.Id}}" type="number" min="0" (change)="this.changeAmount(item.Id)"></td>
         <td>
-          <div style="display: inline-block" class="btn-group-vertical btn-block">
+          <div>
+            <span *ngIf="item.ProductImagePath != undefined">
+              <img class="img-thumbnail" style="border: 4px solid dimgray;" src="{{item.ProductImagePath}}" width="128" alt="Preview Image" />
+            </span>
+            <span *ngIf="item.ProductImagePath == undefined">
+              <img class="img-thumbnail" style="border: 4px solid dimgray;" src="assets/img/profiles/default.png" width="128" alt="Preview Image" />
+            </span>
+          </div>
+        </td>
+        <td>
+          <p>
+            {{item.ProductName}}<br>
+            {{item.ProductCost}}<br>
+            <input value="{{item.Amount}}" id="{{item.Id}}" type="number" min="0" (change)="this.changeAmount(item.Id)">
+          </p>
+          <div style="display: inline-block" class="btn-group-vertical">
             <button class="btn btn-outline-dark" style="border-radius: 0px;" (click)="this.deleteItemFromBasket(item.Id)" >Remove</button>
           </div>
         </td>
       </tr>
-    </tbody>
-  </table>
+    </table>
+  </div>
 </div>
