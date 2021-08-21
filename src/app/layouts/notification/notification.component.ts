@@ -10,7 +10,7 @@ import { INotification } from 'src/app/interfaces/notification.interfaces';
 })
 export class NotificationComponent implements OnInit, OnDestroy {
   
-  @Input() delay = 15000;
+  @Input() delay = 10000;
   public notices: INotification[] = [];
   public text: string | undefined;
   public type = "success";

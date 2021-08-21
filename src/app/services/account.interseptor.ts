@@ -21,14 +21,22 @@ export class AccountInterseptor implements HttpInterceptor {
     return next.handle(req).pipe(
       catchError((error: HttpErrorResponse) => {
         console.log('Interseptor error');
-          if (error.status === 401) {
-            this.authService.logout();
-            this.router.navigate([''], {
-              queryParams: {
-                authFailed: true
-              }
-            });
-          }
+        if(error.status === 400) {
+          this.authService.logout();
+          this.router.navigate(['signup'], {
+            queryParams: {
+              loginAgain: true
+            }
+          });
+        }
+        if (error.status === 401) {
+          this.authService.logout();
+          this.router.navigate([''], {
+            queryParams: {
+              authFailed: true
+            }
+          });
+        }
         return throwError(error);
       })
     );
