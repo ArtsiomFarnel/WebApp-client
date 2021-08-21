@@ -5,6 +5,7 @@ import { ProvidersService } from 'src/app/services/providers.service';
 import { IProvider } from 'src/app/interfaces/providers.interfaces';
 import { PaginationService } from 'src/app/services/pagination.service';
 import { IProviderParams } from 'src/app/interfaces/params.interfaces';
+import { IPagination } from 'src/app/interfaces/pagination.interfaces';
 
 @Component({
   selector: 'app-providers',
@@ -21,6 +22,16 @@ export class ProvidersComponent implements OnInit {
 
   public submitted = false;
   public message: string = '';
+  public isLoading: boolean = false;
+
+  public metaData: IPagination = {
+    TotalPages: 0,
+    TotalCount: 0,
+    PageSize: 0,
+    HasNext: false,
+    HasPrevious: false,
+    CurrentPage: 1
+  };
 
   public params: IProviderParams = {
     SearchTerm: '',
@@ -30,11 +41,10 @@ export class ProvidersComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private providersService: ProvidersService,
-    private paginationService: PaginationService) { }
+    private providersService: ProvidersService) { }
 
   ngOnInit(): void {
-    this.paginationService.metaData.CurrentPage = 1;
+    this.metaData.CurrentPage = 1;
     this.sendQuery();
     this.addForm = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.minLength(4)])
@@ -49,16 +59,22 @@ export class ProvidersComponent implements OnInit {
   }
 
   public sendQuery(): void {
-    this.params.PageNumber = this.paginationService.metaData.CurrentPage;
+    this.isLoading = true;
     this.providersService.GetAllProviders(this.params).subscribe(data => {
       this.providers = data.body;
-      this.paginationService.metaData.TotalPages = JSON.parse(data.headers.get('pagination')).TotalPages;
+      this.metaData = JSON.parse(data.headers.get('pagination'));
+      this.isLoading = false;
     });
+  }
+
+  public onPageChange(page: number = 1): void {
+    this.params.PageNumber = page;
+    this.sendQuery();
   }
 
   public search(): void {
     this.params.SearchTerm = (<HTMLInputElement>document.getElementById('search')).value;
-    this.sendQuery();
+    this.onPageChange();
   }
 
   public putDataToUpdate(provider: IProvider): void {

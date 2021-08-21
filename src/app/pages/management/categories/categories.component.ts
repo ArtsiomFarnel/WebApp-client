@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ICategory } from 'src/app/interfaces/categories.interfaces';
+import { IPagination } from 'src/app/interfaces/pagination.interfaces';
 import { ICategoryParams } from 'src/app/interfaces/params.interfaces';
 import { CategoriesService } from 'src/app/services/categories.service';
 import { PaginationService } from 'src/app/services/pagination.service';
@@ -20,6 +21,16 @@ export class CategoriesComponent implements OnInit {
 
   public submitted = false;
   public message: string = '';
+  public isLoading: boolean = false;
+
+  public metaData: IPagination = {
+    TotalPages: 0,
+    TotalCount: 0,
+    PageSize: 0,
+    HasNext: false,
+    HasPrevious: false,
+    CurrentPage: 1
+  };
   
   public params: ICategoryParams = {
     SearchTerm: '',
@@ -28,11 +39,10 @@ export class CategoriesComponent implements OnInit {
   }
 
   constructor(
-    private categoriesService: CategoriesService,
-    private paginationService: PaginationService) { }
+    private categoriesService: CategoriesService) { }
 
   ngOnInit(): void {
-    this.paginationService.metaData.CurrentPage = 1;
+    this.metaData.CurrentPage = 1;
     this.sendQuery();
     this.addForm = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.minLength(4)])
@@ -47,16 +57,22 @@ export class CategoriesComponent implements OnInit {
   }
 
   public sendQuery(): void {
-    this.params.PageNumber = this.paginationService.metaData.CurrentPage;
+    this.isLoading = true;
     this.categoriesService.GetAllCategories(this.params).subscribe(data => {
       this.categories = data.body;
-      this.paginationService.metaData.TotalPages = JSON.parse(data.headers.get('pagination')).TotalPages;
+      this.metaData = JSON.parse(data.headers.get('pagination'));
+      this.isLoading = false;
     });
+  }
+
+  public onPageChange(page: number = 1): void {
+    this.params.PageNumber = page;
+    this.sendQuery();
   }
 
   public search(): void {
     this.params.SearchTerm = (<HTMLInputElement>document.getElementById('search')).value;
-    this.sendQuery();
+    this.onPageChange();
   }
 
   public putDataToUpdate(category: ICategory): void {

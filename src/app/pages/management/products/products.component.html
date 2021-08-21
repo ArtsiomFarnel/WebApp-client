@@ -4,14 +4,7 @@
       <h4>Products List</h4>
     </div>
     <div class="col-6 col-md-6">
-      <!--<div class="pagination ">
-        <button class="btn btn-outline-dark" style="border-radius: 0px;" (click)="leftPage()">&laquo;</button>
-        <button class="btn btn-outline-dark" style="border-radius: 0px;">{{this.params.PageNumber}}</button>
-        <button class="btn btn-outline-dark" style="border-radius: 0px;">{{this.params.PageNumber}}</button>
-        <button class="btn btn-outline-dark" style="border-radius: 0px;">{{this.params.PageNumber}}</button>
-        <button class="btn btn-outline-dark" style="border-radius: 0px;" (click)="rightPage()">&raquo;</button>
-      </div>-->
-      <app-pagination (click)="this.sendQuery()"></app-pagination>
+      <app-pagination [metaData]="metaData" [isActive]="!isLoading" (changePage)="onPageChange($event)"></app-pagination>
     </div>
     <div class="col-6 col-md-2">
       <button type="button" class="btn btn-block btn-outline-dark" style="border-radius: 0px;" data-toggle="modal" data-target="#addModal">Add</button>

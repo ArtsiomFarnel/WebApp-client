@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ICategory } from 'src/app/interfaces/categories.interfaces';
+import { IPagination } from 'src/app/interfaces/pagination.interfaces';
 import { IProductParams } from 'src/app/interfaces/params.interfaces';
 import { IProduct } from 'src/app/interfaces/products.interfaces';
 import { IProvider } from 'src/app/interfaces/providers.interfaces';
@@ -20,9 +21,19 @@ export class CatalogComponent implements OnInit {
   public categories$: Observable<ICategory[]> | undefined;
   public providers$: Observable<IProvider[]> | undefined;
   public products: IProduct[] = [];
+
   public isLoading: boolean = false;
 
-  public params: IProductParams = {
+  public metaData: IPagination = {
+    TotalPages: 0,
+    TotalCount: 0,
+    PageSize: 0,
+    HasNext: false,
+    HasPrevious: false,
+    CurrentPage: 1
+  };
+
+  private params: IProductParams = {
     SearchTerm: '',
     Currency: 'EUR',
     OrderBy: '',
@@ -35,22 +46,24 @@ export class CatalogComponent implements OnInit {
   constructor(
     private productsService: ProductsService,
     private providersService: ProvidersService,
-    private categoriesServie: CategoriesService,
-    private paginationService: PaginationService,
-    private notificationService: NotificationService) { }
+    private categoriesServie: CategoriesService) { }
 
   public sendQuery(): void {
-    this.params.PageNumber = this.paginationService.metaData.CurrentPage;
     this.isLoading = true;
     this.productsService.GetAllProducts(this.params).subscribe(data => {
       this.products = data.body;
-      this.paginationService.metaData.TotalPages = JSON.parse(data.headers.get('pagination')).TotalPages;
+      this.metaData = JSON.parse(data.headers.get('pagination'));
       this.isLoading = false;
     });
   }
 
+  public onPageChange(page: number = 1): void {
+    this.params.PageNumber = page;
+    this.sendQuery();
+  }
+
   ngOnInit(): void {
-    this.paginationService.metaData.CurrentPage = 1;
+    this.metaData.CurrentPage = 1;
     this.sendQuery();
     this.providers$ = this.providersService.GetProviders();
     this.categories$ = this.categoriesServie.GetCategories();
@@ -58,26 +71,26 @@ export class CatalogComponent implements OnInit {
 
   public search(): void {
     this.params.SearchTerm = (<HTMLInputElement>document.getElementById('search')).value;
-    this.sendQuery();
+    this.onPageChange();
   }
 
   public currencyChange(): void {
     this.params.Currency = (<HTMLInputElement>document.getElementById('currency')).value;
-    this.sendQuery();
+    this.onPageChange();
   }
 
   public order(): void {
     this.params.OrderBy = (<HTMLInputElement>document.getElementById('order')).value;
-    this.sendQuery();
+    this.onPageChange();
   }
 
   public setCategory(): void {
     this.params.CategoryId = Number((<HTMLInputElement>document.getElementById('category')).value);
-    this.sendQuery();
+    this.onPageChange();
   }
 
   public setProvider(): void {
     this.params.ProviderId = Number((<HTMLInputElement>document.getElementById('provider')).value);
-    this.sendQuery();
+    this.onPageChange();
   }
 }

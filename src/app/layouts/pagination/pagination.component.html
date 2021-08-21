@@ -1,9 +1,9 @@
 <div class="pagination ">
-  <button class="btn btn-outline-dark" style="border-radius: 0px;" (click)="this.paginationService.metaData.CurrentPage = 1;">.</button>
-  <button class="btn btn-outline-dark" style="border-radius: 0px;" (click)="this.paginationService.changePage(-1);">&laquo;</button>
+  <button class="btn btn-outline-dark" style="border-radius: 0px;" (click)="setFirst()">.</button>
+  <button class="btn btn-outline-dark" style="border-radius: 0px;" (click)="this.setPage(-1);">&laquo;</button>
   <!--<button class="btn btn-outline-dark" style="border-radius: 0px;" *ngIf="this.paginationService.metaData.CurrentPage > 1" (click)="this.paginationService.changePage(-1);">{{this.paginationService.metaData.CurrentPage-1}}</button>-->
-  <button class="btn btn-outline-dark" style="border-radius: 0px; background-color: gray;">{{this.paginationService.metaData.CurrentPage}}</button>
+  <button class="btn btn-outline-dark" style="border-radius: 0px; background-color: gray;">{{this.metaData.CurrentPage}}</button>
   <!--<button class="btn btn-outline-dark" style="border-radius: 0px;" *ngIf="this.paginationService.metaData.CurrentPage < this.paginationService.metaData.TotalPages" (click)="this.paginationService.changePage(+1);">{{this.paginationService.metaData.CurrentPage+1}}</button>-->
-  <button class="btn btn-outline-dark" style="border-radius: 0px;" (click)="this.paginationService.changePage(+1);">&raquo;</button>
-  <button class="btn btn-outline-dark" style="border-radius: 0px;" (click)="this.paginationService.metaData.CurrentPage = this.paginationService.metaData.TotalPages;">...</button>
+  <button class="btn btn-outline-dark" style="border-radius: 0px;" (click)="this.setPage(+1);">&raquo;</button>
+  <button class="btn btn-outline-dark" style="border-radius: 0px;" (click)="setLast()">...</button>
 </div>
