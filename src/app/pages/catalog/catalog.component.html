@@ -58,13 +58,6 @@
       <label class="col-sm-4 col-form-label" style="font-weight: bold">Pagination</label>
       <div class="col-sm-8">
         <app-pagination (click)="this.sendQuery()"></app-pagination>
-        <!--<div class="pagination ">
-          <button class="btn btn-outline-dark" style="border-radius: 0px;" (click)="leftPage()">&laquo;</button>
-          <button class="btn btn-outline-dark" style="border-radius: 0px;">{{this.params.PageNumber}}</button>
-          <button class="btn btn-outline-dark" style="border-radius: 0px;">{{this.params.PageNumber}}</button>
-          <button class="btn btn-outline-dark" style="border-radius: 0px;">{{this.params.PageNumber}}</button>
-          <button class="btn btn-outline-dark" style="border-radius: 0px;" (click)="rightPage()">&raquo;</button>
-        </div>-->
       </div> 
     </div>
   </div>
@@ -74,12 +67,17 @@
   <span>Loading...</span>
 </div>
 <div style="margin-left: 320px; margin-bottom: 60px;" *ngIf="!isLoading"> 
-  <!--<div *ngIf="products?.length==0">No records found.</div>-->
+  <div *ngIf="products?.length==0">No records found.</div>
     <ul class="products clearfix">
       <li class="product-wrapper" *ngFor="let product of products">
         <div class="product">
           <div class="product-photo">
-            <img src="{{product.ImagePath}}" width="128" alt="Preview Image" />
+            <span *ngIf="product.ImagePath != undefined">
+              <img src="{{product.ImagePath}}" width="128" alt="Preview Image" />
+            </span>
+            <span *ngIf="product.ImagePath == undefined">
+              <img src="assets/img/profiles/default.png" width="128" alt="Preview Image" />
+            </span>
           </div>
           <div>
             <h4 style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">{{product.Name}}</h4>
