@@ -1,6 +1,11 @@
 <div class="notification-panel">
     <div class="notification" *ngFor="let notice of notices">
-        <img class="product-img" *ngIf="notice.product" src="{{notice.product.ImagePath}}" alt="imageProduct">
+        <span *ngIf="notice.product?.ImagePath != undefined">
+            <img class="product-img" *ngIf="notice.product" src="{{notice.product.ImagePath}}" alt="imageProduct">
+        </span>
+        <span *ngIf="notice.product?.ImagePath == undefined">
+            <img class="product-img" *ngIf="notice.product" src="assets/img/profiles/default.png" alt="imageProduct">
+        </span>
         <span class="notice-text">{{notice.text}}</span>
         <button class="btn btn-outline-dark notification-close" style="border-radius: 0px; background-color: gray;" (click)="this.notices.splice(this.notices.indexOf(notice), 1);">x</button>
     </div>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { IBasketItem, IBasketItemAmount } from 'src/app/interfaces/baskets.interfaces';
 import { IBasketParams } from 'src/app/interfaces/params.interfaces';
 import { BasketService } from 'src/app/services/basket.service';
+import { PaginationService } from 'src/app/services/pagination.service';
 
 @Component({
   selector: 'app-basket',
@@ -19,17 +20,27 @@ export class BasketComponent implements OnInit {
     PageSize: 4
   }
 
-  public TotalCost: number = 0;
-  public TotalAmount: number = 0;
+  public totalCost: number = 0;
+  public totalAmount: number = 0;
 
-  constructor(private basketService: BasketService) { }
+  constructor(
+    private basketService: BasketService,
+    private paginationService: PaginationService) { }
+
+  public countAll(){
+    this.totalAmount = 0;
+    this.totalCost = 0;
+    this.basketItems.forEach(element => {
+      this.totalAmount += element.Amount;
+      this.totalCost += element.Amount*element.ProductCost;
+    });
+  }
 
   public sendQuery(): void {
     this.basketService.GetAllBasketItems(this.params).subscribe(data => {
       this.basketItems = data.body;
-      //...
-      //this.metaData = JSON.parse(data.headers.get('pagination'));
-      //this.paginationService.metaData = JSON.parse(data.headers.get('pagination'));
+      this.paginationService.metaData = JSON.parse(data.headers.get('pagination'));
+      this.countAll();
     });
   }
 
@@ -38,15 +49,21 @@ export class BasketComponent implements OnInit {
   }
 
   public deleteItemFromBasket(id: number | undefined): void {
-    this.basketService.DeleteItemFromBasket(id).subscribe();
-    this.sendQuery();
+    this.basketService.DeleteItemFromBasket(id).subscribe(data =>
+      this.sendQuery()
+    );
   }
 
   public changeAmount(id: number | undefined): void {
+    const inputChange = <HTMLInputElement>document.getElementById(String(id));
+    inputChange.setAttribute("disabled","disabled");
     const basketItem: IBasketItemAmount = {
       Id: id,
-      Amount: Number((<HTMLInputElement>document.getElementById('amount')).value)
+      Amount: Number(inputChange.value)
     };
-    this.basketService.ChangeImtemAmount(basketItem).subscribe();
+    this.basketService.ChangeItemAmount(basketItem).subscribe(data => {
+      this.sendQuery()
+      inputChange.removeAttribute("disabled");
+    });
   }
 }

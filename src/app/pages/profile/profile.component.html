@@ -5,7 +5,12 @@
       <tr>
         <td>
           <div>
-            <img class="img-thumbnail" style="border: 4px solid dimgray;" src="{{data.imagePath}}" width="128" alt="Profile Image" />
+            <span *ngIf="data.imagePath != undefined">
+              <img class="img-thumbnail" style="border: 4px solid dimgray;" src="{{data.imagePath}}" width="128" alt="Profile Image" />
+            </span>
+            <span *ngIf="data.imagePath == undefined">
+              <img class="img-thumbnail" style="border: 4px solid dimgray;" src="assets/img/profiles/default.png" width="128" alt="Profile Image" />
+            </span>
           </div>
         </td>
         <td style="vertical-align: top;">

@@ -23,7 +23,7 @@ export class BasketService {
     return this.http.delete<any>(`${this.pathBase}remove_from_basket/${id}`);
   }
 
-  public ChangeImtemAmount(basketItem: IBasketItemAmount): Observable<any> {
+  public ChangeItemAmount(basketItem: IBasketItemAmount): Observable<any> {
     return this.http.put<any>(`${this.pathBase}change_amount/${basketItem.Id}`, basketItem);
   }
 }
