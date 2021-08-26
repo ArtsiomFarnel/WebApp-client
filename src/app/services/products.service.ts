@@ -1,7 +1,7 @@
 import { HttpClient, HttpResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { getProductsUrl } from "../functions/get-urls";
+import { getProductsUrl } from "../shared/functions/get-urls";
 import { IProductParams } from "../interfaces/params.interfaces";
 import { IProduct, IProductDTO } from "../interfaces/products.interfaces";
 

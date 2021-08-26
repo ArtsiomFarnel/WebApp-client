@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { getCategoriesUrl } from "../functions/get-urls";
+import { getCategoriesUrl } from "../shared/functions/get-urls";
 import { ICategory } from "../interfaces/categories.interfaces";
 import { ICategoryParams } from "../interfaces/params.interfaces";
 

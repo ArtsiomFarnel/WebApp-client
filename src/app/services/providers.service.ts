@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { getProvidersUrl } from "../functions/get-urls";
+import { getProvidersUrl } from "../shared/functions/get-urls";
 import { IProviderParams } from "../interfaces/params.interfaces";
 import { IProvider } from "../interfaces/providers.interfaces";
 

@@ -1,4 +1,4 @@
-import { IProductParams, ICategoryParams, IProviderParams } from "../interfaces/params.interfaces";
+import { IProductParams, ICategoryParams, IProviderParams } from "../../interfaces/params.interfaces";
 
 export function getProductsUrl(pathBase: string, params: IProductParams | undefined): string {
   let url = `${pathBase}?`;
