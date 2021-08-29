@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home.component';
+import { GoogleMapModule } from 'src/app/shared/components/google-map/google-map.module';
 
 
 
@@ -9,7 +10,8 @@ import { HomeComponent } from './home.component';
     HomeComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    GoogleMapModule
   ],
   exports: [
     HomeComponent
